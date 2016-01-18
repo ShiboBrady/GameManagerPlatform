@@ -5,98 +5,36 @@
   <title>测试</title>
   <script type="text/javascript"src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
   <style type="text/css">
-     .tabbed {
-  width: 80%;
-  min-width: 400px;
-  margin: 0 auto;
-  margin-bottom: 68px;
-  border-bottom: 4px solid #000;
-  overflow: hidden;
-  transition: border 250ms ease;
+  .close {
+    /* still bad on picking color */
+    background: white;
+    color: black;
+    /* make a round button */
+    border-radius: 12px;
+     /*center text */
+    line-height: 20px;
+    height: 20px;
+    width: 20px;
+    font-size: 18px;
+    padding: 1px;
+    z-index: 4;
 }
-.tabbed ul {
-  margin: 0px;
-  padding: 0px;
-  overflow: hidden;
-  float: left;
-  padding-left: 48px;
-  list-style-type: none;
-}
-.tabbed ul * {
-  margin: 0px;
-  padding: 0px;
-}
-.tabbed ul li {
-  display: block;
-  float: right;
-  padding: 10px 24px 8px;
-  background-color: #FFF;
-  margin-right: 46px;
-  z-index: 2;
-  position: relative;
-  cursor: pointer;
-  color: #777;
-  text-transform: uppercase;
-  font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;
-  transition: all 250ms ease;
-}
-.tabbed ul li:before,
-.tabbed ul li:after {
-  display: block;
-  content: " ";
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 44px;  
-  background-color: #FFF;
-  transition: all 250ms ease;
-}
-.tabbed ul li:before {
-  right: -24px;
-  transform: skew(30deg, 0deg);
-  box-shadow: rgba(0,0,0,.1) 3px 2px 5px, inset rgba(255,255,255,.09) -1px 0;
-}
-.tabbed ul li:after {
-  left: -24px;
-  transform: skew(-30deg, 0deg);
-  box-shadow: rgba(0,0,0,.1) -3px 2px 5px, inset rgba(255,255,255,.09) 1px 0;
-}
-.tabbed ul li:hover,
-.tabbed ul li:hover:before,
-.tabbed ul li:hover:after {
-  background-color: #F4F7F9;
-  color: #444;
-}
-.tabbed ul li.active {
-  z-index: 3;
-}
-.tabbed ul li.active,
-.tabbed ul li.active:before,
-.tabbed ul li.active:after {
-  background-color: #000;
-  color: #fff;
-}
- 
-/* Round Tabs */
-.tabbed.round ul li {
-  border-radius: 8px 8px 0 0;
-}
-.tabbed.round ul li:before {
-  border-radius: 0 8px 0 0;
-}
-.tabbed.round ul li:after {
-  border-radius: 8px 0 0 0;
-}
+/* use cross as close button */
+/*.close::before {
+    content: "\2716";
+}*/
+/* place the button on top-right */
+/*.close {
+    top: -10px;
+    right: -10px;
+    position: absolute;
+}*/
   </style>
 </head>
 <body>
-<div class='tabbed round'>
-    <ul>
-      <li>Third tab</li>
-      <li>Second tab</li>
-      <li class='active'>First tab</li>
-    </ul>
-</div>        
+<div style="height: 100px; width: 100px; border: 1px solid black; position: relative;">
+    <span class="close"></span>
+</div>   
 
 </body>
 <script type="text/javascript">

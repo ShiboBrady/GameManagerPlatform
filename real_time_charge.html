@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/highcharts.js"></script>
+    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/heatmap.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+    <script src="public/javascript/contest.js"></script>
+</head>
+
+<body>
+    <div id="wraper">
+        <div class="box search_box">
+            <div class="choosedata_wraper">
+                <div class="chooseDateType">
+                    <ul class="tabs">
+                        <li for="choosedata_easy " class="active"><span>&nbsp简单1</span></li>
+                        <li for="choosedata_more"><span>&nbsp更多1</span></li>
+                    </ul>
+                </div>
+                <div class="choosedata choosedata_easy">
+                    <div class="dropdown">
+                        <select name="one" class="dropdown-select">
+                            <option value="">选择查询时间点</option>
+                            <option value="1">昨天</option>
+                            <option value="2">本周</option>
+                            <option value="3">上周</option>
+                            <option value="4">最近30天</option>
+                            <option value="5">上月</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="choosedata choosedata_more none">
+                    <label for="begindata">开始日期</label>
+                    <input class="input" id="begindata" type="text" onfocus="WdatePicker();" />
+                    <label for="enddata">结束日期</label>
+                    <input class="input" id="enddata" type="text" onfocus="WdatePicker();" />
+                </div>
+
+                <div class="chooseVersion">
+                    <div class="dropdown">
+                        <select name="one" class="dropdown-select">
+                            <option value="">选择版本</option>
+                            <option value="1">1.0</option>
+                            <option value="2">1.1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search">
+                    <input type="button" class="button button-blue" value="查询" />
+                </div>
+            </div>
+        </div>
+        <div class="box chart_box">
+            <div id="container1"></div>
+        </div>
+        <div class="box table_box">
+            <table id="example" class="dataTable display cell-border" cellspacing="0" width="100%">
+                <thead>
+                    <!-- <tr>
+                        <th>name</th>
+                        <th>position</th>
+                        <th>salary</th>
+                        <th>start_date</th>
+                        <th>office</th>
+                        <th>extn</th>
+                    </tr> -->
+                </thead>
+                <!-- <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </tfoot> -->
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

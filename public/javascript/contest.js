@@ -33,7 +33,7 @@ $(function () {
 
     var generateData = function () {
         var value = getRandom(100);
-        console.log(value);
+        //console.log(value);
         var date = getdate();
         // var arraydata = dynamicInfo["dynamicData"];
         // var arraydate = dynamicInfo["dynamicDate"];
@@ -42,7 +42,7 @@ $(function () {
             arraydate.splice(0, 1);
         } 
         arraydata.push(value);
-        console.log(arraydata);
+        //console.log(arraydata);
         arraydate.push(date);
         // dynamicInfo["dynamicData"] = arraydata;
         // dynamicInfo["dynamicDate"] = arraydate;
@@ -134,3 +134,4 @@ $(function () {
           }
       });
   });
+

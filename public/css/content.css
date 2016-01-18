@@ -47,8 +47,8 @@ background: rgba(0, 0, 0, 0) !important; border: 0; border-radius: 0; -webkit-ap
 .choosedata_more { width: 400px; }
 .none { display: none; }
 .chooseDateType .tabs { border-radius: 7px 0 0 7px; list-style: none; margin: 0; padding: 0; border-bottom: 1px solid #79bedb; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
-.chooseDateType .tabs a { vertical-align: baseline; text-decoration: none; display: inline-block; line-height: 36px; width: 36px; height: 36px; border-top: 1px solid #79bedb; border-top: 1px solid rgba(255, 255, 255, 0.15); border-bottom: 1px solid #3497bf; }
-.tabs a:hover { background: #79bedb; }
-.tabs li:first-child a { border-top: 0; border-radius: 7px 0 0 0; }
-.tabs .active a, .tabs a:active { z-index: 2; background: #dee5f4; cursor: default; }
-.tabs:active .active a:not(:active) { background: none; }
+.chooseDateType .tabs span { vertical-align: baseline; text-decoration: none; display: inline-block; line-height: 36px; width: 36px; height: 36px; border-top: 1px solid #79bedb; border-top: 1px solid rgba(255, 255, 255, 0.15); border-bottom: 1px solid #3497bf; }
+.tabs span:hover { background: #79bedb; }
+.tabs li:first-child span { border-top: 0; border-radius: 7px 0 0 0; }
+.tabs .active span, .tabs span:active { z-index: 2; background: #dee5f4; cursor: default; }
+.tabs:active .active span:not(:active) { background: none; }

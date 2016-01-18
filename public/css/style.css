@@ -37,17 +37,19 @@ header #userInfo { float: left; width: 33%; height: 100%; }
 #displayArrow.open .displayWraper .displayContent { width: 0; height: 0; border-width: 11px 11px 11px 0; border-style: solid; border-color: transparent #333 transparent transparent;/*透明 透明 透明 灰*/ position: absolute; left: 2px; top: 15px; }
 /*导航tab*/
 .tabbed { width: 100%; height: 31px; min-width: 400px; overflow: hidden; background: grey; transition: border 250ms ease; }
-.tabbed ul { margin: 0px; padding: 0px; overflow: hidden; float: left; padding-left: 30px; list-style-type: none; }
+.tabbed ul { margin: 0px; padding: 0px; overflow: hidden; float: left; padding-left: 30px; list-style: none; }
 .tabbed ul * { margin: 0px; padding: 0px; }
-.tabbed ul li { display: block; float: right; padding: 8px 11px 3px; background-color: #FFF; margin-right: 40px; z-index: 2; position: relative; cursor: pointer; color: #777; text-transform: uppercase; font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif; transition: all 250ms ease; }
-.tabbed ul li span {display: block; max-width: 60px; margin: 0 12px;}
-.tabbed ul li:before, .tabbed ul li:after { display: block; content: " "; position: absolute; top: 0; height: 100%; width: 28px; background-color: #FFF; transition: all 250ms ease;}
+.tabbed ul li { display: block; float: left; padding: 8px 11px 3px; background-color: #FFF; margin-right: 40px; z-index: 2; position: relative; cursor: pointer; color: #777; text-transform: uppercase; font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif; transition: all 250ms ease; }
+.tabbed ul li span.title { display: block; max-width: 60px; margin: 0 12px; }
+.tabbed ul li:before, .tabbed ul li:after { display: block; content: " "; position: absolute; top: 0; height: 100%; width: 28px; background-color: #FFF; transition: all 250ms ease; }
 .tabbed ul li:before { right: -20px; transform: skew(30deg, 0deg); box-shadow: rgba(0,0,0,.1) 3px 2px 5px, inset rgba(255,255,255,.09) -1px 0; }
 .tabbed ul li:after { left: -20px; transform: skew(-30deg, 0deg); box-shadow: rgba(0,0,0,.1) -3px 2px 5px, inset rgba(255,255,255,.09) 1px 0; }
 .tabbed ul li:hover, .tabbed ul li:hover:before, .tabbed ul li:hover:after { background-color: #F4F7F9; color: #444; }
 .tabbed ul li.active { z-index: 3; }
 .tabbed ul li.active, .tabbed ul li.active:before, .tabbed ul li.active:after { background-color: #93a0b0; color: #fff; }
-/* Round Tabs */
 .tabbed.round ul li { border-radius: 6px 6px 0 0; }
 .tabbed.round ul li:before { border-radius: 0 6px 0 0; }
 .tabbed.round ul li:after { border-radius: 6px 0 0 0; }
+.close { color: red; border-radius: 10px; line-height: 15px; text-align: center; height: 15px; width: 15px; font-size: 10px; padding: 1px; z-index: 4; top: 9px; right: -8px; position: absolute; }
+.close::before { content: "\2716"; }
+.close:hover { background: red; color: white; }
