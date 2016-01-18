@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>leftmenu</title>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <style type="text/css">
+body {
+    margin:0;
+    padding:0;
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    background: url("../images/bg.jpg") top center no-repeat;
+    letter-spacing: 0.2px;
+}
+
+    ul {
+    list-style: none;
+    width: 276px;
+}
+
+li {
+    cursor: pointer;
+}
+    .htmleaf-content {
+        width: 200px;
+        height: 100%;
+    }
+        .mainmenu {
+    /*margin: 90px auto;*/
+    font-size: 16px;
+    position:relative;
+    padding:0;
+}
+
+.mainmenu > li {
+    background-color: #e4644b;
+    border-top: 1px solid #d05942;
+    height: 48px;
+    color: #f7f1e3;
+    box-sizing: border-box;
+}
+
+.mainmenu > li:first-child {
+    border-radius: 7px 7px 0 0;
+    border-top: 0;
+}
+
+.mainmenu > li:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+.mainmenu > li span {
+    display:block;
+    line-height: 48px;
+}
+
+.mainmenu > li .icon {
+    padding: 14px 20px 0 20px;
+    float: left;
+    width: 20px;
+    height: 20px;
+    display:block;
+}
+
+.mainmenu > li .messages {
+    background: url("../images/messages.png") no-repeat;
+    padding: 0;
+    margin-top: -33px;
+    margin-right: 19px;
+    float: right;
+    display: block;
+    width: 34px;
+    height: 18px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 19px;
+}
+
+.expand-triangle {
+    background: url("public/images/expand.gif") top left no-repeat;
+    height: 10px;
+    width: 276px;
+    content: " ";
+    margin-left: -40px;
+}
+
+/*------------ Sub Menu ------------*/
+.submenu {
+    box-sizing: border-box;
+    color: #ae9f9f;
+    font-size: 13px;
+    content: " ";
+    /*opacity: 0.5;*/
+}
+
+.submenu li {
+    line-height: 20px;
+    height: 35px;
+    padding-top: 11px;
+    margin-left: -40px;
+    background-color: #484141;
+    border-left: solid 6px #484141;
+    transition: border-left 220ms ease-in;
+}
+
+.submenu .chosen,
+.submenu .chosen:hover {
+    border-left: solid 6px #96d145;
+}
+
+.submenu li:hover {
+    border-left: solid 6px #d05942;
+}
+
+.submenu li span {
+    margin-left:30px;
+}
+
+.animate {
+    animation: flip 2000ms ease-in-out alternate;
+}
+
+/*@keyframes flip {
+    to {
+        transform: rotateY(360deg);
+    }
+}*/
+    </style>
+    <script type="text/javascript">
+        $(document).ready( function() {
+    var $submenu = $('.submenu');
+    var $mainmenu = $('.mainmenu');
+    $submenu.hide();
+    $submenu.first().delay(400).slideDown(700);
+    $submenu.on('click','li', function() {
+        $submenu.siblings().find('li').removeClass('chosen');
+        $(this).addClass('chosen');
+    });
+    $mainmenu.on('click', 'li', function() {
+        $(this).next('.submenu').slideToggle().siblings('.submenu').slideUp();
+    });
+    $mainmenu.children('li:last-child').on('click', function() {
+        $mainmenu.fadeOut().delay(500).fadeIn();
+    });
+});
+    </script>
+</head>
+<body>
+    <div class="htmleaf-content">
+        <ul class="mainmenu">
+            <li><span>Account<span></li>
+                <ul class="submenu">
+                    <div class="expand-triangle"></div>
+                    <li><span>Basics</span></li>
+                    <li><span>Picture</span></li>
+                    <li><span>Go Premium</span></li>
+                </ul>
+            <li><span>Messages</span><div class="messages">23</div></li>
+                <ul class="submenu">
+                    <div class="expand-triangle"></div>
+                    <li><span>New</span></li>
+                    <li><span>Sent</span></li>
+                    <li><span>Trash</span></li>
+                </ul>
+            <li><span>Settings</span></li>
+                <ul class="submenu">
+                    <div class="expand-triangle"></div>
+                    <li><span>Language</span></li>
+                    <li><span>Password</span></li>
+                    <li><span>Notifications</span></li>
+                    <li><span>Privacy</span></li>
+                    <li><span>Payments</span></li>
+                </ul>
+            <li><img src="images/key.png" alt="Key icon" class="icon"><span>Logout</span></li>
+        </ul>
+    </div>
+</body>
+</html>
