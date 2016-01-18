@@ -1,0 +1,53 @@
+/*全局样式*/        
+a { color: #333; text-decoration: none; }
+a:hover { text-decoration: underline; color: #06c }
+body { min-height: 100%; margin: 0; background-color: #fff; font-size: 14px; font-family: "icomoon"; }
+/*总体样式*/        
+header { width: 100%; height: 50px; background-color: #303335; }
+#left_part { position: absolute; top: 50px; bottom: 0; width: 200px; overflow: auto; background-color: #222; }
+#right_part { position: absolute; top: 50px; right: 0; bottom: 0; left: 200px; overflow: hidden; background-color: #999; }
+/*头部样式*/
+header #headerNav { float: left; width: 33%; height: 100%; /*border: 1px solid red;*/ padding: 0; color: #404040; font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif; }
+header #headerTitle { float: left; width: 33%; height: 100%; text-align: center; }
+header #userInfo { float: left; width: 33%; height: 100%; }
+.nav { height: 48px; display: inline-block; list-style: none; margin: 0; padding: 0; }
+.nav > li, .nav:active > .active { float: left; position: relative; margin: 0 0 4px; height: 44px; color: #ccc; text-shadow: 0 1px rgba(0, 0, 0, 0.9); background-color: rgba(0, 0, 0, 0.05); border: 1px solid #232428; border-bottom-color: #1f2326; background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px #262a2e, 0 3px #1f2326, 0 4px 3px rgba(0, 0, 0, 0.2); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px #262a2e, 0 3px #1f2326, 0 4px 3px rgba(0, 0, 0, 0.2); }
+.nav > li:hover { color: #b0d157; text-shadow: 0 1px black, 0 0 20px rgba(255, 255, 255, 0.5); }
+.nav > li.active, .nav > .active:active, .nav > li:active { z-index: 2; margin: 4px 0 0; height: 43px; color: #aaa; text-shadow: 0 1px black; background-color: rgba(255, 255, 255, 0.03); border-color: #212425; border-width: 1px 0; background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)); background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)); background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)); background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)); -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), inset 0 -1px 1px rgba(0, 0, 0, 0.15), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.05); box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), inset 0 -1px 1px rgba(0, 0, 0, 0.15), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.05); }
+.nav > li:active { z-index: 3; }
+.nav > li:first-child { border-left-width: 1px !important; border-left-color: #212425; border-radius: 5px 0 0 5px; }
+.nav > li:last-child { border-right-width: 1px !important; border-right-color: #212425; border-radius: 0 5px 5px 0; }
+.nav > li + li, .nav:active > .active + li, .nav:active > li + .active { border-left-width: 0; }
+.nav > .active + li, .nav > .active:active + li, .nav > li:active + li, .nav > li:active + .active { border-left-width: 1px; }
+.nav > li > a { display: block; line-height: 44px; padding: 0 20px; font-size: 12px; font-weight: bold; color: inherit; text-decoration: none; outline: 0; }
+.nav .nav-icon { padding: 0 15px; }
+.icon-home { display: inline-block; width: 16px; height: 16px; vertical-align: text-top; background-image: url("../images/icons.png"); background-repeat: no-repeat; background-color: transparent; font: 0/0 serif; text-shadow: none; color: transparent; background-position: 0 0; }
+#headerTitle > span { font-family: "icomoon"; /*text-shadow:#f3f3f3 1px 1px 0px, #b2b2b2 1px 2px 0;*/ text-shadow: 0 1px rgba(0, 0, 0, 0.9); font-size: 30px; font-weight: bold; line-height: 50px; color: white; }
+#userInfo > ul { display: inline-block; list-style: none; }
+#userInfo > ul > li { float: left; margin: 0 20px; }
+/*左侧框架*/
+#left_part .show_iframe { overflow: hidden; width: 100%; height: 100%; z-index: 1; }
+/*右侧框架*/
+#right_part .show_iframe { overflow: hidden; width: 100%; height: 100%; z-index: 2; }
+/*隐藏菜单按钮*/
+#displayArrow { position: absolute; z-index: 3; top: 40%; height: 50px; width: 13px; background-color: white; border-radius: 0 3px 3px 0; -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); }
+#displayArrow:hover { background: green; }
+#displayArrow .displayWraper { position: relative; width: 100%; height: 100%; }
+#displayArrow .displayWraper .displayContent { width: 0; height: 0; border-width: 11px 0 11px 11px; border-style: solid; border-color: transparent transparent transparent #333;/*透明 透明 透明 灰*/ position: absolute; left: 0; top: 15px; }
+#displayArrow.open .displayWraper .displayContent { width: 0; height: 0; border-width: 11px 11px 11px 0; border-style: solid; border-color: transparent #333 transparent transparent;/*透明 透明 透明 灰*/ position: absolute; left: 2px; top: 15px; }
+/*导航tab*/
+.tabbed { width: 100%; height: 31px; min-width: 400px; overflow: hidden; background: grey; transition: border 250ms ease; }
+.tabbed ul { margin: 0px; padding: 0px; overflow: hidden; float: left; padding-left: 30px; list-style-type: none; }
+.tabbed ul * { margin: 0px; padding: 0px; }
+.tabbed ul li { display: block; float: right; padding: 8px 11px 3px; background-color: #FFF; margin-right: 40px; z-index: 2; position: relative; cursor: pointer; color: #777; text-transform: uppercase; font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif; transition: all 250ms ease; }
+.tabbed ul li span {display: block; max-width: 60px; margin: 0 12px;}
+.tabbed ul li:before, .tabbed ul li:after { display: block; content: " "; position: absolute; top: 0; height: 100%; width: 28px; background-color: #FFF; transition: all 250ms ease;}
+.tabbed ul li:before { right: -20px; transform: skew(30deg, 0deg); box-shadow: rgba(0,0,0,.1) 3px 2px 5px, inset rgba(255,255,255,.09) -1px 0; }
+.tabbed ul li:after { left: -20px; transform: skew(-30deg, 0deg); box-shadow: rgba(0,0,0,.1) -3px 2px 5px, inset rgba(255,255,255,.09) 1px 0; }
+.tabbed ul li:hover, .tabbed ul li:hover:before, .tabbed ul li:hover:after { background-color: #F4F7F9; color: #444; }
+.tabbed ul li.active { z-index: 3; }
+.tabbed ul li.active, .tabbed ul li.active:before, .tabbed ul li.active:after { background-color: #93a0b0; color: #fff; }
+/* Round Tabs */
+.tabbed.round ul li { border-radius: 6px 6px 0 0; }
+.tabbed.round ul li:before { border-radius: 0 6px 0 0; }
+.tabbed.round ul li:after { border-radius: 6px 0 0 0; }

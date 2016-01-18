@@ -1,0 +1,31 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.page_header{
+    border-width: 0px; margin: 0px; outline-offset: 0px; height:80px;line-height:80px;background:#00a5a5;width:100%;position:absolute;z-index:5;top:0;text-align:center;
+}
+
+.main_title {
+    float: left;
+    font-size: 28px;
+    margin-left: 50px;
+    font-weight: bold;
+    line-height: 65px;
+    font-family: "微软雅黑";
+}
+
+.header_user {
+    float: right;
+}
+
+.header_user > span, a {
+    float: left;
+    line-height: 65px;
+    margin-left: 50px;
+}
+
+#unlogin {
+    margin-left: 0px;
+    color: #fff;
+}
