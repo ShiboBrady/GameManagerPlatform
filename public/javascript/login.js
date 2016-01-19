@@ -1,6 +1,7 @@
 $(function () {
     //login.html
-    $(".login-submit").click(function () {
+    $(".login-submit").click(function (e) {
+        e.preventDefault();
         var username = $(".username");
         var password = $(".userpwd");
         var msg = "";
@@ -14,12 +15,14 @@ $(function () {
 
         if (msg != "") {
             alert(msg);
+            return false;
         } else {
             var params = $(".loginform").serialize();
             alert("params is: " + params);
             // $.post("/loginconfirm", params, function (data, status) {
             //     console.log(data.tip);
             // }, "json");
+             window.location.href = 'index.html?name=' + username;
         }
     });
 
@@ -28,4 +31,4 @@ $(function () {
             $(".login-submit").trigger("click");
         }
     });
-}
+})

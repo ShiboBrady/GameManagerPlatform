@@ -1,35 +1,14 @@
 * {margin: 0; padding: 0;}
 html {width: 98%;}
+body {background: #93a0b0; font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
+.wraper {width: 80%; margin: 0 auto; margin-bottom: 50px;}
+.left {width: 80%; height: 100%;}
+.right {position: fixed; top: 30px; right: 80px; width: 302px;}
 
-.wraper {width: 80%; margin: 0 auto;}
-.left {width: 70%; height: 100%;}
-.right {width: 30%; height: 100%;}
-
-.table {}
-.table table {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    margin: 45px;
-    width: 480px;
-    text-align: left;
-    border-collapse: collapse;
-}
-.table th {
-    font-size: 14px;
-    font-weight: normal;
-    padding: 12px 15px;
-    color: #039;
-}
-.table td {
-    padding: 10px 15px;
-    color: #669;
-    border-top: 1px solid #e8edff;
-}
-
-.table tr:hover td
-{
-    color: #339;
-    background: #eff2ff;
-}
+.box {width: 100%; border-radius: 5px 5px 5px 5px; margin-top: 30px; border: 1px solid red; background-image: -webkit-linear-gradient(top, #fafafa, #e1e1e1); background-image: -moz-linear-gradient(top, #fafafa, #e1e1e1); background-image: -o-linear-gradient(top, #fafafa, #e1e1e1); background-image: linear-gradient(to bottom, #fafafa, #e1e1e1); -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);}
+.table_title {font-weight: bold; display: block; margin: 1em 0 1em 2em;}
+.version {text-align: center;}
 
 /*clock*/
+svg{ display: block; margin: 0 auto;}
+

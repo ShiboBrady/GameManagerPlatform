@@ -23,9 +23,9 @@ $(function () {
         }
     });
 
-    $("aside .accordion .section a").click(function () {
-        var href = $(this).attr('_href');
-        var title = $(this).attr('page_title');
+    $("aside .accordion .section li").click(function () {
+        var href = $(this).find('a').attr('_href');
+        var title = $(this).find('a').attr('page_title');
         window.parent.leftmenu_click(href, title);
     });
 });

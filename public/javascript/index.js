@@ -1,7 +1,13 @@
 $(function () {
-    //index.html
+    var username = getUrlParam('name');
+    console.log("username: " + username);
+    $("#userInfo .userLoginName").html(username);
+
     $("#headerNav .nav li").click(function () {
         $(this).siblings().removeClass("active").end().addClass("active");
+        if ($(this).hasClass("nav_home")) {
+            chooseTab($(this).find("a").attr("_href"), $(this).find("a").attr("page_title"));
+        }
     });
 
     $("#displayArrow").click(function() {
@@ -20,8 +26,12 @@ $(function () {
 
     $("#right_part .tabbed ul").on('click', 'li', function () {
         console.log("li click.");
-        var show_nav_list = $("#right_part .tabbed ul li");
+        var show_nav_list = $("#right_part .tabbed ul li"); 
         var index = show_nav_list.index($(this));
+        if ( -1 == index ) {
+            return;
+        }               
+        console.log("tab " + index + " click");
         show_nav_list.removeClass("active");
         $(this).addClass("active");
         var iframe_box = $("#right_part .show_iframe");
@@ -30,26 +40,39 @@ $(function () {
 
     $("#right_part .tabbed ul").on('click', '.close', function () {
         var tabIndex = $(this).parent().index();
-        var show_nav = $("#right_part .tabbed ul");
+        var show_nav = $("#right_part .tabbed ul li");
         var iframe_box = $("#right_part .show_iframe");
 
         console.log('tabIndex:' + tabIndex);
         $(this).parent().remove();
         if (tabIndex > 0) {
             iframe_box.find(".iframe_content").eq(tabIndex).remove();
-            show_nav.find("li").eq(tabIndex - 1).addClass("active");
+            show_nav.eq(tabIndex - 1).addClass("active");
+            console.log("tab " + (tabIndex - 1) + " has add active class.");
             iframe_box.find(".iframe_content").eq(tabIndex - 1).show();
-        } else if (tabIndex == 0 && show_nav.children().size() > 0) {
+        } else if (tabIndex == 0 && show_nav.size() > 0) {
+            console.log("Impossible execute this.");
             iframe_box.find(".iframe_content").eq(0).remove();
-            show_nav.find("li").eq(0).addClass("active");
+            show_nav.eq(0).addClass("active");
             iframe_box.find(".iframe_content").eq(0).show();
         } else {
+            console.log("Impossible execute this.");
             var lastIframe = iframe_box.find(".iframe_content").eq(0);
             lastIframe.removeAttr("src");
             lastIframe.load();
         }
     });
 });
+
+function getUrlParam(name){
+    //构造一个含有目标参数的正则表达式对象  
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");  
+    //匹配目标参数  
+    var r = window.location.search.substr(1).match(reg);  
+    //返回参数值  
+    if (r!=null) return unescape(r[2]);  
+    return null;  
+} 
 
 function leftmenu_click(href, title) {
     console.log("call parant func successed;");
