@@ -2,7 +2,7 @@
 html {width: 98%;}
 body {background: #93a0b0; font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
 .wraper {width: 80%; margin: 0 auto; margin-bottom: 50px;}
-.left {width: 80%; height: 100%;}
+.left {width: 100%; height: 100%;}
 .right {position: fixed; top: 30px; right: 80px; width: 302px;}
 
 .box {width: 100%; border-radius: 5px 5px 5px 5px; margin-top: 30px; border: 1px solid red; background-image: -webkit-linear-gradient(top, #fafafa, #e1e1e1); background-image: -moz-linear-gradient(top, #fafafa, #e1e1e1); background-image: -o-linear-gradient(top, #fafafa, #e1e1e1); background-image: linear-gradient(to bottom, #fafafa, #e1e1e1); -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);}

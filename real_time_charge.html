@@ -6,9 +6,9 @@
     <title>welcome</title>
     <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script>
+    <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script> -->
     <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/highcharts.js"></script>
-    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/heatmap.js"></script>
+    <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/heatmap.js"></script> -->
     <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
@@ -28,7 +28,7 @@
                 </div>
                 <div class="choosedata choosedata_easy">
                     <div class="dropdown">
-                        <select name="one" class="dropdown-select">
+                        <select name="time" class="dropdown-select">
                             <option value="">选择查询时间点</option>
                             <option value="1">昨天</option>
                             <option value="2">本周</option>
@@ -47,7 +47,7 @@
 
                 <div class="chooseVersion">
                     <div class="dropdown">
-                        <select name="one" class="dropdown-select">
+                        <select name="version" class="dropdown-select">
                             <option value="">选择版本</option>
                             <option value="1">1.0</option>
                             <option value="2">1.1</option>
@@ -64,6 +64,18 @@
         </div> 
         <div class="box table_box">
             <table id="example" class="dataTable display cell-border" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>position</th>
+                        <th>salary</th>
+                        <th>start_date</th>
+                        <th>office</th>
+                        <th>extn</th>
+                    </tr>
+                </thead>
+            </table>
+            <table id="" class="dataTable display cell-border" cellspacing="0" width="100%">
                 <thead>
                     <!-- <tr>
                         <th>name</th>

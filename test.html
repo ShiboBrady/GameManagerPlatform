@@ -4,52 +4,28 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>测试</title>
   <script type="text/javascript"src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="public/lib/dropdown/css/style1.css"/>
+  <script type="text/javascript" src="public/lib/dropdown/js/jquery.dropdown.js"></script>
+  <script type="text/javascript" src="public/lib/dropdown/js/modernizr.custom.63321.js"></script>
   <style type="text/css">
-  .close {
-    /* still bad on picking color */
-    background: white;
-    color: black;
-    /* make a round button */
-    border-radius: 12px;
-     /*center text */
-    line-height: 20px;
-    height: 20px;
-    width: 20px;
-    font-size: 18px;
-    padding: 1px;
-    z-index: 4;
-}
-/* use cross as close button */
-/*.close::before {
-    content: "\2716";
-}*/
-/* place the button on top-right */
-/*.close {
-    top: -10px;
-    right: -10px;
-    position: absolute;
-}*/
+
   </style>
 </head>
 <body>
-<div style="height: 100px; width: 100px; border: 1px solid black; position: relative;">
-    <span class="close"></span>
-</div>   
+    <div class="fleft">
+          <select id="cd-dropdown" class="cd-select">
+              <option value="-1" selected>Choose an animal</option>
+              <option value="1">Monkey</option>
+              <option value="2">Bear</option>
+              <option value="3">Squirrel</option>
+              <option value="4">Elephant</option>
+          </select>
+    </div>
 
 </body>
 <script type="text/javascript">
-  $("#btn").click(function() {
-    if($(this).val()=="隐藏导航栏")
-    {
-        $("#left").hide();
-        $(this).val('显示导航栏');
-    }else
-    {
-        $("#left").show();
-        $(this).val('隐藏导航栏');
-    }
-
+  $(document).ready(function(){
+        $( '#cd-dropdown').dropdown();
   });
-
 </script>
 </html>

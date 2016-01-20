@@ -1,7 +1,7 @@
 var data1 = [
     {
         "名词": "IDP",
-        "定义": "智能数据平台 intelligence data platform（IDP）， 包括来了数据统计、GM工具、三方游戏统计、客服、配置管理等模块",
+        "定义": "智能数据平台 intelligence data platform（IDP）, 包括来了数据统计、GM工具、三方游戏统计、客服、配置管理等模块",
     }
 ]
 var data2 = [
@@ -148,10 +148,10 @@ var data3 = [
 
 $(function () {
     $('#table1').DataTable({
-        data: data1,
-        columns: [
-            { data: '名词' },
-            { data: '定义' },
+        'data': data1,
+        'columns': [
+            { 'data': '名词', 'title': '名词' },
+            { 'data': '定义', 'title': '定义' },
         ],
         paging: false,
         searching: false,
@@ -162,8 +162,8 @@ $(function () {
     $('#table2').DataTable({
         data: data2,
         columns: [
-            { data: '名词' },
-            { data: '定义' },
+            { 'data': '名词', 'title': '名词' },
+            { 'data': '定义', 'title': '定义' },
         ],
         paging: false,
         searching: false,
@@ -174,8 +174,8 @@ $(function () {
     $('#table3').DataTable({
         data: data3,
         columns: [
-            { data: '名词' },
-            { data: '定义' },
+            { 'data': '名词', 'title': '名词' },
+            { 'data': '定义', 'title': '定义' },
         ],
         paging: false,
         searching: false,

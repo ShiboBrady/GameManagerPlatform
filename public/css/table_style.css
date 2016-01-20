@@ -17,8 +17,7 @@ table.dataTable {
   }
   table.dataTable thead th,
   table.dataTable tfoot th {
-    font-weight: bold;
-    background: red;}
+    font-weight: bold;}
   table.dataTable thead th,
   table.dataTable thead td {
     padding: 10px 18px;
