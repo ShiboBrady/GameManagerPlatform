@@ -24,24 +24,11 @@ $(function () {
             }
         });
     })(Highcharts);;
-    // $('#container1').highcharts({
-    //     chart: {borderColor: '#EBBA95',borderRadius: 20,borderWidth: 2,type: 'line'},
-    //     title: {text: 'My first Highcharts chart.'},
-    //     xAxis: {categories: ['2016-1-16 10:10:50', '2016-1-16 10:11:00']},
-    //     yAxis: {},
-    //     series: [{data: [29.9, 71.5]}],
-    //     credits: {enabled:false},
-    //     // exporting: {enabled:true},
-    // });
-    // var chart2 = $('#container2').highcharts({
-    //     chart: {type: 'spline'},
-    //     title: {text: '在线人数统计曲线图'},
-    //     xAxis: {categories: ['my', 'first', 'chart']},
-    //     yAxis: {title:{text:'在线人数'}},
-    //     series: [{name:'Jane', data:[1, 0, 4]}, {name: 'John', data:[5, 7, 3]}],
-    //     credits: {enabled:false},
-    // });
 
+    $(".nav_box .refresh_button").click(function () {
+        console.log("reload");
+        window.location.reload();
+    });
     var initArray = [];
     for (var i = 0; i < 20; i++) {
         initArray.push(0);
@@ -61,16 +48,12 @@ $(function () {
     var generateData = function () {
         var value = getRandom(100);
         var value1 = getRandom(100);
-        //console.log(value);
         var date = getdate();
-        // var arraydata = dynamicInfo["dynamicData"];
-        // var arraydate = dynamicInfo["dynamicDate"];
         if (arraydata.length >= 10) {
             arraydata.splice(0, 1);
             arraydate.splice(0, 1);
         } 
         arraydata.push(value);
-        //console.log(arraydata);
         arraydate.push(date);
         // dynamicInfo["dynamicData"] = arraydata;
         // dynamicInfo["dynamicDate"] = arraydate;
@@ -85,7 +68,6 @@ $(function () {
     };
     
     
-
     var chart = new Highcharts.Chart({
         chart: {
             style:{ backgroundColor: '#fafafa', borderRadius: '5px', border: '1px solid red'},
@@ -104,7 +86,7 @@ $(function () {
         // exporting: {
         //     enabled: false
         // },
-        title: {text:'在线人数统计曲线图'},
+        title: {text:'充值金额分段曲线图'},
         xAxis: {categories: arraydate, title: {text:'name'}, tickPixelInterval: 150},
         yAxis: {title:{text:'在线人数'}},
         series: [{name:'人', data:arraydata}],
@@ -121,7 +103,6 @@ $(function () {
             renderTo: 'container2',
             type: 'spline',
             animation: Highcharts.svg,
-            // don't animate in old IE               
             marginRight: 10,
             events: {
                 load: function() {
@@ -130,7 +111,7 @@ $(function () {
             }
         },
         title: {
-            text: '在线人数统计曲线图'
+            text: '充值金额分段曲线图'
         },
         xAxis: {
             type: 'datetime',
@@ -209,17 +190,20 @@ $(function () {
         [
             "1",
             "2015-05-01 00:00",
-            "1000",
+            "10",
+            "50",
         ],
         [
             "2",
             "2015-05-01 00:02",
-            "1000",
+            "20",
+            "100",
         ],
         [
             "3",
             "2015-05-01 00:04",
-            "1000",
+            "30",
+            "150",
         ],
     ];
     console.log("Begin to render table.");
@@ -228,7 +212,8 @@ $(function () {
         columns: [
                 { 'title': '序号' },
                 { 'title': '时间点' },
-                { 'title': '在线' }
+                { 'title': '充值人数' },
+                { 'title': '充值金额' },
             ],
         paging: false,
         searching: false,

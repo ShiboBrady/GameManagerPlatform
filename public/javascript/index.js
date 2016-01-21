@@ -1,4 +1,9 @@
 $(function () {
+    console.log($("#right_part").width());
+    $(window).resize(function(){
+        console.log("windows size changed, new size is: " + $("#right_part").width());
+        //window.onresize = moveCheckboxBeforeLegend;  
+    });
     var username = getUrlParam('name');
     console.log("username: " + username);
     $("#userInfo .userLoginName").html(username);
@@ -24,16 +29,15 @@ $(function () {
           }
     });
 
-    $("#right_part .tabbed ul").on('click', 'li', function () {
-        console.log("li click.");
+    $("#right_part .tabbed ul").on('click', 'span', function () {
+        console.log("span click.");
         var show_nav_list = $("#right_part .tabbed ul li"); 
-        var index = show_nav_list.index($(this));
+        var index = show_nav_list.index($(this).parent());
         if ( -1 == index ) {
             return;
-        }               
+        }
         console.log("tab " + index + " click");
-        show_nav_list.removeClass("active");
-        $(this).addClass("active");
+        show_nav_list.removeClass("active").eq(index).addClass("active");
         var iframe_box = $("#right_part .show_iframe");
         iframe_box.find(".iframe_content").hide().eq(index).show();
     });
@@ -112,7 +116,7 @@ function createIframe (href, titleName) {
     } else {
         show_nav.find('li').removeClass("active");
         iframebox.hide();
-        iframe_box.append('<iframe class="iframe_content" name="iframe_content" src=' + href + ' width="100%" height="100%"></iframe>');
+        iframe_box.append('<iframe class="iframe_content" name="iframe_content" src=' + href + ' width="100%" height="100%" frameborder="0" ></iframe>');
     }
     show_nav.append('<li class="active"><span class="title" page_href="' + href + '">' + titleName + '</span><span class="close"><span></li>');
     var showbox = iframebox.find(".iframe_content:visible");

@@ -3,17 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Charge</title>
+    <title>Summary Data</title>
     <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
     <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script> -->
     <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/highcharts.js"></script>
+    <!-- // <script type="text/javascript" src="http://code.highcharts.com/3.0.7/highcharts.js"></script> -->
     <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/heatmap.js"></script> -->
     <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
-    <script src="public/javascript/charge.js"></script>
+    <script type="text/javascript" src="public/javascript/summary_data.js"></script>
 </head>
 
 <body>
@@ -25,23 +26,23 @@
                 <span>&gt;</span>
                 <span>斗地主</span>
                 <span>&gt;</span>
-                <span>实时数据</span>
+                <span>汇总数据</span>
                 <span>&gt;</span>
-                <span>实时充值</span>
+                <span>总计数据</span>
             </nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
-         <div class="box search_box">
+        <div class="box search_box">
             <div class="choosedata_wraper">
                 <div class="chooseDateType">
                     <ul class="tabs">
-                        <li for="choosedata_easy " class="active"><span>&nbsp简单1</span></li>
-                        <li for="choosedata_more"><span>&nbsp更多1</span></li>
+                        <li for="choosedata_easy " class="active"><span href="#">&nbsp简单</span></li>
+                        <li for="choosedata_more"><span href="#">&nbsp更多</span></li>
                     </ul>
                 </div>
                 <div class="choosedata choosedata_easy">
                     <div class="dropdown">
-                        <select name="time" class="dropdown-select">
+                        <select name="one" class="dropdown-select">
                             <option value="">选择查询时间点</option>
                             <option value="1">昨天</option>
                             <option value="2">本周</option>
@@ -60,7 +61,7 @@
 
                 <div class="chooseVersion">
                     <div class="dropdown">
-                        <select name="version" class="dropdown-select">
+                        <select name="one" class="dropdown-select">
                             <option value="">选择版本</option>
                             <option value="1">1.0</option>
                             <option value="2">1.1</option>
@@ -72,19 +73,13 @@
                 </div>
             </div>
         </div>
-        <div class="box chart_box">
-            <div class="chart_title"><span>总图形展示</span></div>
-            <div id="container1"></div>
-        </div>
-
-        <div class="box chart_box">
-            <div class="chart_title"><span>按照房间统计</span></div>
-            <div id="container2"></div>
-        </div>
-
         <div class="box">
             <div class="chart_title"><span>查询结果</span></div>
-            <table id="example" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+        </div>
+        <div class="box chart_box">
+            <div class="chart_title"><span>图形展示</span></div>
+            <div id="container1"></div>
         </div>
     </div>
 </body>

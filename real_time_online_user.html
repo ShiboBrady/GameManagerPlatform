@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>welcome</title>
+    <title>Online User</title>
     <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
     <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script> -->
@@ -14,11 +14,24 @@
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
-    
+    <script type="text/javascript" src="public/javascript/online_user.js"></script>
 </head>
 
 <body>
     <div id="wraper">
+        <div class="nav_box">
+            <nav>
+                <span>当前位置：</span>
+                <span>数据统计</span>
+                <span>&gt;</span>
+                <span>斗地主</span>
+                <span>&gt;</span>
+                <span>实时数据</span>
+                <span>&gt;</span>
+                <span>实时在线</span>
+            </nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
         <div class="box search_box">
             <div class="choosedata_wraper">
                 <div class="chooseDateType">
@@ -72,10 +85,9 @@
 
         <div class="box">
             <div class="chart_title"><span>查询结果</span></div>
-            <table id="example" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
         </div>
     </div>
-    <script src="public/javascript/contest.js"></script>
 </body>
 
 </html>

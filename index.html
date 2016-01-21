@@ -5,7 +5,7 @@
     <title>main page</title>
     <script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="public/javascript/index.js"></script>    
-    <link rel="stylesheet" type="text/css" href="public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="public/css/index.css"/>
 </head>
 <body>
     <header>
@@ -13,15 +13,15 @@
             <nav>
                 <ul class="nav">
                     <li class="nav_home active"><a _href="home.html" page_title="我的主页" class="nav-icon" href="javascript:void(0);" title="Home"><span class="icon-home">Home</span></a></li>
-                    <li><a href="left_menu_datacount.html" target="ifame_leftmenu">数据统计</a></li>
+                    <li><a href="left_menu_datacount.html" target="ifame_leftmenu" title="数据统计">数据统计</a></li>
                     <li><a href="#">GM工具</a></li>
-                    <li><a href="#">财务统计</a></li>
+                    <li><a href="left_menu_finance.html" target="ifame_leftmenu" title="财务统计">财务统计</a></li>
                     <li><a href="#">系统管理</a></li>
                 </ul>
             </nav>
         </div>
         <div id="headerTitle">
-            <span>WCA游戏平台后台管理系统</span>
+            <span>IDP 智能数据后台管理系统</span>
         </div>
         <div id="userInfo">
             <div class="wraper">
@@ -33,20 +33,30 @@
     </header>
     <section id="left_part">
         <div class="show_iframe">
-            <iframe class="ifame_leftmenu" name="ifame_leftmenu" src="left_menu_datacount.html" width="100%" height="100%"></iframe>
+            <iframe class="ifame_leftmenu" name="ifame_leftmenu" src="left_menu_datacount.html" width="100%" height="100%" frameborder="0" ></iframe>
         </div>
     </section>
     <section id="right_part">
-        <div id="displayArrow" class="open"><div class="displayWraper"><span class="displayContent"></span></div></div>
+        <div id="displayArrow" class="open"><div class="displayWraper"><span class="displayContent" title="点击隐藏"></span></div></div>
         <div class="tabbed round">
             <ul>
                 <li class="active"><span class="title" page_href="home.html">我的主页</span></li>
                 <!-- <li><span class="title" page_href="real_time_data.html">实时数据</span><span class="close"><span></li>-->
             </ul>
         </div>
+       <!--  <div id="dropdown">
+          <p>请选择城市</p>
+          <ul>
+             <li><a href="#" rel="1">长沙</a></li>
+             <li><a href="#" rel="2">北京</a></li>
+             <li><a href="#" rel="3">南京</a></li>
+             <li><a href="#" rel="4">堪培拉</a></li>
+             <li><a href="#" rel="5">多伦多</a></li>
+          </ul>
+        </div> -->
         <div class="show_iframe">
             <div style="display:none" class="loading"></div>
-            <iframe class="iframe_content" src="home.html" name="iframe_content" width="100%" height="100%"></iframe>
+            <iframe class="iframe_content" src="home.html" name="iframe_content" width="100%" height="100%" frameborder="0" ></iframe>
         </div>
     </section>
 </body>
