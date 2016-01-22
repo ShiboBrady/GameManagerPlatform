@@ -70,7 +70,7 @@ $(function () {
     
     var chart = new Highcharts.Chart({
         chart: {
-            style:{ backgroundColor: '#fafafa', borderRadius: '5px', border: '1px solid red'},
+            style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
             renderTo: 'container1',
             type:'spline',
             marginRight: 10,

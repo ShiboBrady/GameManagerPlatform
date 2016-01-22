@@ -1,9 +1,8 @@
 $(function () {
-    console.log($("#right_part").width());
-    $(window).resize(function(){
-        console.log("windows size changed, new size is: " + $("#right_part").width());
-        //window.onresize = moveCheckboxBeforeLegend;  
-    });
+    // console.log($("#right_part").width());
+    // $(window).resize(function(){
+    //     console.log("windows size changed, new size is: " + $("#right_part").width());
+    // });
     var username = getUrlParam('name');
     console.log("username: " + username);
     $("#userInfo .userLoginName").html(username);
@@ -65,8 +64,58 @@ $(function () {
             lastIframe.removeAttr("src");
             lastIframe.load();
         }
+
+        // if (isNeedAdjustWidthWhenCloseTab()) {
+        //     adJustWidthWhenCloseTab();
+        // }
     });
 });
+var spanWidthInit = 60;
+var spanWidthChanged = 60;
+var eachLiMarginLeft = 30;
+var eachSpanMargin = 23;
+
+function isNeedAdjustWidthWhenAddTab () {
+    var windowSize = $("#right_part").width();
+    var eachWidth = spanWidthInit + eachSpanMargin * 2 + eachLiMarginLeft;
+    var maxTabNum = parseInt(windowSize / eachWidth); 
+    var curTabNum = $("#right_part .tabbed ul").children().size();
+    console.log("windowSize: " + windowSize + ", eachWidth: " + eachWidth + ", maxTabNum: " + maxTabNum + ", curTabNum: " + curTabNum);
+    if (maxTabNum >= curTabNum + 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function isNeedAdjustWidthWhenCloseTab () {
+    if (spanWidthChanged == spanWidthInit) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function adJustWidthWhenAddTab() {
+    var windowSize = $("#right_part").width();
+    var curTabNum = $("#right_part .tabbed ul").children().size() + 1;
+    var eachTabWidth = parseInt(windowSize / curTabNum);
+    var eachSpanWidth = eachTabWidth - eachSpanMargin * 2 - eachLiMarginLeft;
+    $("#right_part .tabbed ul li span.title").css("width", eachSpanWidth);
+    spanWidthChanged = eachSpanWidth;
+    console.log("windowSize: " + windowSize + ", curTabNum: " + curTabNum + ", eachTabWidth: " + eachTabWidth + ", eachSpanWidth: " + eachSpanWidth);
+}
+
+function adJustWidthWhenCloseTab() {
+    var windowSize = $("right_part").width();
+    var curTabNum = $("#right_part .tabbed ul").children().size() - 1;
+    var eachTabWidth = (windowSize - tabMarginLeft) / curTabNum;
+    var eachSpanWidth = eachTabWidth - eachSpanMargin * 2 - eachLiMarginLeft;
+    $("#right_part .tabbed ul li span.title").css("width", eachSpanWidth);
+    spanWidthChanged = eachSpanWidth;
+    console.log("windowSize: " + windowSize + ", curTabNum: " + curTabNum + ", eachTabWidth: " + eachTabWidth + ", eachSpanWidth: " + eachSpanWidth);
+}
+
 
 function getUrlParam(name){
     //构造一个含有目标参数的正则表达式对象  
@@ -106,6 +155,9 @@ function chooseTab (href, title) {
 }
 
 function createIframe (href, titleName) {
+    // if (isNeedAdjustWidthWhenAddTab()) {
+    //     adJustWidthWhenAddTab();
+    // }
     var show_nav = $("#right_part .tabbed ul");
     var iframe_box = $("#right_part .show_iframe");
     var iframebox = iframe_box.find(".iframe_content");

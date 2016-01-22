@@ -68,34 +68,38 @@ header #headerNav .nav > li, .nav:active > .active {
 	margin: 0 0 4px;
 	height: 44px;
 	color: #fff;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.9);
+	/*text-shadow: 0 1px rgba(0, 0, 0, 0.9);*/
 	background-color: rgba(0, 0, 0, 0.05);
 	border: 1px solid #232428;
 	border-bottom-color: #1f2326;
-	background-image: -webkit-linear-gradient(top, #0c6ac0, #0aa1ff);
-	background-image: -moz-linear-gradient(top, #0c6ac0, #0aa1ff);
-	background-image: -o-linear-gradient(top, #0c6ac0, #0aa1ff);
-	background-image: linear-gradient(to bottom, #0c6ac0, #0aa1ff);
+	background-image: -webkit-linear-gradient(top, #0aa1ff, #0c6ac0);
+	background-image: -moz-linear-gradient(top, #0aa1ff, #0c6ac0);
+	background-image: -o-linear-gradient(top, #0aa1ff, #0c6ac0);
+	background-image: linear-gradient(to bottom, #0aa1ff, #0c6ac0);
 	-webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px #262a2e, 0 3px #1f2326, 0 4px 3px #133463;
 	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px #262a2e, 0 3px #1f2326, 0 4px 3px #133463;
 }
 header #headerNav .nav > li:hover {
-	color: #bde5ff;
-	text-shadow: 0 1px black, 0 0 20px rgba(255, 255, 255, 0.5);
+	/*color: #bde5ff;*/
+	/*text-shadow: 0 1px black, 0 0 20px rgba(255, 255, 255, 0.5);*/
+	background-image: -webkit-linear-gradient(top, #6cc6ff, #0d7ee5);
+	background-image: -moz-linear-gradient(top, #6cc6ff, #0d7ee5);
+	background-image: -o-linear-gradient(top, #6cc6ff, #0d7ee5);
+	background-image: linear-gradient(to bottom, #6cc6ff, #0d7ee5);
 }
 header #headerNav .nav > li.active, .nav > .active:active, .nav > li:active {
 	z-index: 2;
 	margin: 4px 0 0;
 	height: 43px;
 	color: #bde5ff;
-	text-shadow: 0 1px black;
+	/*text-shadow: 0 1px black;*/
 	background-color: rgba(255, 255, 255, 0.03);
 	border-color: #212425;
 	border-width: 1px 0;
-	background-image: -webkit-linear-gradient(top, #0aa1ff, #0c6ac0);
-	background-image: -moz-linear-gradient(top, #0aa1ff, #0c6ac0);
-	background-image: -o-linear-gradient(top, #0aa1ff, #0c6ac0);
-	background-image: linear-gradient(to bottom, #0aa1ff, #0c6ac0);
+	background-image: -webkit-linear-gradient(top, #0c6ac0, #0aa1ff);
+	background-image: -moz-linear-gradient(top, #0c6ac0, #0aa1ff);
+	background-image: -o-linear-gradient(top, #0c6ac0, #0aa1ff);
+	background-image: linear-gradient(to bottom, #0c6ac0, #0aa1ff);	
 	-webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), inset 0 -1px 1px rgba(0, 0, 0, 0.15), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.05);
 	box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), inset 0 -1px 1px rgba(0, 0, 0, 0.15), 1px 0 rgba(0, 0, 0, 0.05), -1px 0 rgba(0, 0, 0, 0.05), 0 1px rgba(255, 255, 255, 0.05);
 }
@@ -220,21 +224,38 @@ header #userInfo a:hover {
 	left: 2px;
 	top: 15px;
 }
-/*导航tab*/
-.tabbed {/*float: left; right: 100px; */
+
+.tab_box {
 	width: 100%;
 	height: 31px;
-	min-width: 400px;
-	overflow: hidden;
 	background: #4a5c7a;
-	transition: border 250ms ease;
 }
-.tabbed ul {
-	margin: 5px 0 0 0;
-	padding: 0px;
+
+.tab_wraper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	/*border: 1px solid red;*/
+}
+/*导航tab*/
+.tabbed {/*float: left; right: 100px; */
+	position: absolute;
+	left: 0;
+	right: 50px;
+	bottom: 0;
+	height: 100%;
 	overflow: hidden;
 	float: left;
-	padding-left: 25px;
+	/*transition: border 250ms ease;*/
+}
+.tabbed ul {
+	
+	width: 100%;
+	margin-top: 5px;
+	padding: 0px;
+	overflow: hidden;
+	/*float: left;*/
+	/*padding-left: 25px;*/
 	list-style: none;
 }
 .tabbed ul * {
@@ -244,21 +265,23 @@ header #userInfo a:hover {
 .tabbed ul li {
 	display: block;
 	float: left;
-	padding: 8px 11px 3px;
+	padding: 8px 0 3px;
 	background-color: #a8bddf;
-	margin-right: 30px;
+	/*margin-right: 30px;*/
+	margin-left: 30px;
 	z-index: 2;
 	position: relative;
 	cursor: pointer;
 	color: #777;
+	font-weight: bold;
 	text-transform: uppercase;
-	font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;
-	transition: all 250ms ease;
+	/*font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;*/
+	/*transition: all 250ms ease;*/
 }
 .tabbed ul li span.title {
 	display: block;
 	width: 60px;
-	margin: 0 12px;
+	margin: 0 23px;
 }
 .tabbed ul li:before, .tabbed ul li:after {
 	display: block;
@@ -268,7 +291,7 @@ header #userInfo a:hover {
 	height: 100%;
 	width: 30px;
 	background-color: #a8bddf;
-	transition: all 250ms ease;
+	/*transition: all 250ms ease;*/
 }
 .tabbed ul li:before {
 	right: -20px;
@@ -301,7 +324,7 @@ header #userInfo a:hover {
 	border-radius: 6px 0 0 0;
 }
 .close {
-	color: red;
+	color: white;
 	border-radius: 10px;
 	line-height: 15px;
 	text-align: center;
@@ -314,6 +337,10 @@ header #userInfo a:hover {
 	right: -8px;
 	position: absolute;
 }
+.tabbed ul li.active .close, .tabled ul li:hover .close {
+	color: red;
+}
+
 .close::before {
 	content: "\2716";
 }
@@ -321,8 +348,49 @@ header #userInfo a:hover {
 	background: red;
 	color: white;
 }
-#dropdown {
-	float: right;
-	width: 100px;
-	width: 31px;
+
+/*更多tab箭头*/
+.arrow_box {
+	width: 50px;
+	position: absolute;
+	right:0;
+	bottom: 0;
+}
+.arrow_wraper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.arrow {
+	width: 0;
+	height: 0;
+	border-width: 11px 11px 0 11px;
+	border-style: solid;
+	border-color: #333 transparent transparent transparent; /*透明 透明 透明 灰*/
+	position: absolute;
+	left: 5px;
+	top: -20px;
+}
+
+.more_tab {
+	position: absolute;
+	width: 150px;
+	top:31px;
+	right: 0;
+	border: 1px solid red;
+}
+.more_tab ul {
+	list-style: none;
+	background:#e8f5fe;
+}
+.more_tab ul li {
+	height:24px; /*line-height:24px; text-indent:10px*/
+}
+
+.more_tab ul li a {
+	display:block; height:24px; color:#807a62; text-decoration:none
+}
+
+.more_tab ul li:hover {
+	background:#c6dbfc; color:#369
 }
