@@ -333,18 +333,21 @@ header #userInfo a:hover {
 	font-size: 10px;
 	padding: 1px;
 	z-index: 4;
+}
+.close::before {
+	content: "\2716";
+}
+
+.tabbed ul li .close {
 	top: 9px;
 	right: -8px;
 	position: absolute;
+	z-index: 4;
 }
 .tabbed ul li.active .close, .tabled ul li:hover .close {
 	color: red;
 }
-
-.close::before {
-	content: "\2716";
-}
-.close:hover {
+.tabbed.round ul li .close:hover {
 	background: red;
 	color: white;
 }
@@ -356,12 +359,12 @@ header #userInfo a:hover {
 	right:0;
 	bottom: 0;
 }
-.arrow_wraper {
+.arrow_box .arrow_wraper {
 	width: 100%;
 	height: 100%;
 	position: relative;
 }
-.arrow {
+.arrow_box.down .arrow_wraper .arrow {
 	width: 0;
 	height: 0;
 	border-width: 11px 11px 0 11px;
@@ -372,25 +375,49 @@ header #userInfo a:hover {
 	top: -20px;
 }
 
+.arrow_box.up .arrow_wraper .arrow {
+	width: 0;
+	height: 0;
+	border-width: 0 11px 11px 11px;
+	border-style: solid;
+	border-color: transparent transparent #333 transparent;
+	position: absolute;
+	left: 5px;
+	top: -20px;
+}
+
 .more_tab {
 	position: absolute;
-	width: 150px;
+	width: 180px;
 	top:31px;
 	right: 0;
-	border: 1px solid red;
+	display: none;
+	border-radius: 0 0 5px 5px;
 }
 .more_tab ul {
 	list-style: none;
-	background:#e8f5fe;
+	background: transparent;
+	border-radius: 0 0 5px 5px;
 }
 .more_tab ul li {
-	height:24px; /*line-height:24px; text-indent:10px*/
+	height: 35px; /*line-height:24px; text-indent:10px*/
+	border-bottom: 1px solid #c0c0c8;
+	border-radius: 7px 7px 7px 7px;
+	background: #a8bddf;
+	padding: 10px 0 0 10px;
 }
 
-.more_tab ul li a {
-	display:block; height:24px; color:#807a62; text-decoration:none
+.more_tab ul li span {
+	display:block; height:26px; color:#09579a; font-weight: bold;
 }
 
 .more_tab ul li:hover {
-	background:#c6dbfc; color:#369
+	background:#fff; color:#369; cursor: pointer;
+}
+
+.more_tab ul li .close {
+	top: 9px;
+	right: 8px;
+	position: absolute;
+	z-index: 4;
 }
