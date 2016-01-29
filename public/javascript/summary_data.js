@@ -27,8 +27,8 @@ $(function () {
     ];
     console.log("Begin to render table.");
     $('#search_result_table').DataTable({
-        data:data,
-        columns: [
+        "data":data,
+        "columns": [
                 { 'title': '序号' },
                 { 'title': '日期' },
                 { 'title': '今日新增用户数' },
@@ -52,9 +52,17 @@ $(function () {
                 { 'title': '最高在线' },
                 { 'title': '玩1小时以上总用户数' },
             ],
-        paging: false,
-        searching: false,
-        select: false,
+        "paging": false,
+        "searching": false,
+        "select": false,
+        "scrollX": true,
+        "language": {
+            "lengthMenu": "每页 _MENU_ 条记录",
+            "zeroRecords": "没有找到记录",
+            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+            "infoEmpty": "无记录",
+            "infoFiltered": "(从 _MAX_ 条记录过滤)"
+        },
     });
 
     $(".tabs li").click(function () { 

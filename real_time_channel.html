@@ -31,36 +31,36 @@
             </nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
-         <div class="box search_box">
+        <div class="box search_box">
             <div class="choosedata_wraper">
                 <div class="chooseDateType">
                     <ul class="tabs">
-                        <li for="choosedata_easy " class="active"><span>&nbsp简单1</span></li>
-                        <li for="choosedata_more"><span>&nbsp更多1</span></li>
+                        <li for="choosedata_easy" class="active"><span href="#">&nbsp简单</span></li>
+                        <li for="choosedata_more"><span href="#">&nbsp更多</span></li>
                     </ul>
                 </div>
                 <div class="choosedata choosedata_easy">
                     <div class="dropdown">
-                        <select name="time" class="dropdown-select">
+                        <select name="one" class="dropdown-select">
                             <option value="">选择查询时间点</option>
-                            <option value="1">昨天</option>
-                            <option value="2">本周</option>
-                            <option value="3">上周</option>
-                            <option value="4">最近30天</option>
-                            <option value="5">上月</option>
+                            <option value="yesterday">昨天</option>
+                            <option value="thisweek">本周</option>
+                            <option value="lastweek">上周</option>
+                            <option value="lastthiryday">最近30天</option>
+                            <option value="lastmonth">上月</option>
                         </select>
                     </div>
                 </div>
                 <div class="choosedata choosedata_more none">
                     <label for="begindata">开始日期</label>
-                    <input class="input" id="begindata" type="text" onfocus="WdatePicker();" />
+                    <input class="input" id="begindate" type="text" onfocus="WdatePicker();" />
                     <label for="enddata">结束日期</label>
-                    <input class="input" id="enddata" type="text" onfocus="WdatePicker();" />
+                    <input class="input" id="enddate" type="text" onfocus="WdatePicker();" />
                 </div>
 
                 <div class="chooseVersion">
                     <div class="dropdown">
-                        <select name="version" class="dropdown-select">
+                        <select name="one" class="dropdown-select">
                             <option value="">选择版本</option>
                             <option value="1">1.0</option>
                             <option value="2">1.1</option>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="search">
-                    <input type="button" class="button button-blue" value="查询" />
+                    <input type="button" class="button button-blue" value="查询" onclick="search();" />
                 </div>
             </div>
         </div>

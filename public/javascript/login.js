@@ -18,11 +18,21 @@ $(function () {
             return false;
         } else {
             var params = $(".loginform").serialize();
-            alert("params is: " + params);
-            // $.post("/loginconfirm", params, function (data, status) {
-            //     console.log(data.tip);
-            // }, "json");
-             window.location.href = 'index.html?name=' + username;
+            console.log(params);
+            $.post("/data/login", params, function (data, status) {
+                console.log(data);
+                var jsonData = JSON.parse(data);
+                errcode = jsonData['errcode'];
+                result = jsonData['result'];
+                console.log('errcode :' + errcode);
+                console.log('result: ' + result);
+                if (parseInt(errcode) == 0) {
+                    window.location.href = 'index.html?name=' + username.val();                    
+                } else {
+                    alert(result);
+                    password.focus();
+                }
+            });
         }
     });
 

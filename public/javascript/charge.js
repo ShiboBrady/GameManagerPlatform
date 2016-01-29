@@ -1,4 +1,9 @@
 $(function () {
+    $(".nav_box .refresh_button").click(function () {
+        console.log("reload");
+        window.location.reload();
+    });
+
     (function (H) {
         H.wrap(H.Legend.prototype, 'positionCheckboxes', function (p, scrollOffset) {
             var alignAttr = this.group.alignAttr,
@@ -25,167 +30,54 @@ $(function () {
         });
     })(Highcharts);;
 
-    $(".nav_box .refresh_button").click(function () {
-        console.log("reload");
-        window.location.reload();
-    });
-    var initArray = [];
-    for (var i = 0; i < 20; i++) {
-        initArray.push(0);
-    }
-    var arraydata = [29.9, 71.5, 29.9, 71.5, 29.9, 71.5, 29.9, 71.5, 29.9, 71.5];
-    var arraydata1 = [55, 66, 29, 56, 37, 24, 89, 35, 21, 18];
-    var arraydata2 = [29.9, 71.5, 29.9, 71.5, 29.9, 71.5, 29.9, 71.5, 29.9, 71.5];
-    var arraydate = ["2016-1-16 10:10:50", "2016-1-16 10:11:00", "2016-1-16 10:10:50", "2016-1-16 10:11:00", "2016-1-16 10:10:50", "2016-1-16 10:11:00", "2016-1-16 10:10:50", "2016-1-16 10:11:00", "2016-1-16 10:10:50", "2016-1-16 10:11:00"];
-    function getdate () {
-        var d = new Date();
-        var str = d.getFullYear() + '-' + d.getMonth() + 1 + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-        return str;
-    };
-    function getRandom(n) {
-        return Math.floor(Math.random()*n+1)
-    };
-    var generateData = function () {
-        var value = getRandom(100);
-        var value1 = getRandom(100);
-        var date = getdate();
-        if (arraydata.length >= 10) {
-            arraydata.splice(0, 1);
-            arraydate.splice(0, 1);
-        } 
-        arraydata.push(value);
-        arraydate.push(date);
-        // dynamicInfo["dynamicData"] = arraydata;
-        // dynamicInfo["dynamicDate"] = arraydate;
-        // console.log(value + ' ' + date + ' ' + array.length);
-        //chart.series[0].addPoint([date, value], true, true);
-        var x = (new Date()).getTime(),
-            y = Math.random();
-        chart2.series[0].addPoint([x, y + 1], true, true, true);
-        chart2.series[1].addPoint([x, y - 1], true, true, true);
-        chart2.series[2].addPoint([x, y + 2], true, true, true);
-        chart2.series[3].addPoint([x, y - 2], true, true, true);
-    };
+    Highcharts.setOptions({
+        global : {
+            useUTC : false
+        },
+        lang: {
+            downloadJPEG: "下载jpeg格式图片",
+            downloadPDF: "下载pdf文件",
+            downloadPNG: "下载png格式图片",
+        }
+    });    
     
-    
-    var chart = new Highcharts.Chart({
+    var chart = new Highcharts.StockChart({
         chart: {
-            style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
             renderTo: 'container1',
             type:'spline',
-            marginRight: 10,
-            events:{
-                load:function () {
-                        //setInterval(generateData, 1000);
-                    }
-            },
-        },
-        // legend: {
-        //     enabled: false
-        // },
-        // exporting: {
-        //     enabled: false
-        // },
-        title: {text:'充值金额分段曲线图'},
-        xAxis: {categories: arraydate, title: {text:'name'}, tickPixelInterval: 150},
-        yAxis: {title:{text:'在线人数'}},
-        series: [{name:'人', data:arraydata}],
-        plotOptions: {
-            series: {
-                marker: {
-                    enabled: false
-                },
-            }
-        },
-    });
-    var chart2 = new Highcharts.Chart({
-        chart: {
-            renderTo: 'container2',
-            type: 'spline',
-            animation: Highcharts.svg,
-            marginRight: 10,
-            events: {
-                load: function() {
-                    setInterval(generateData, 1000);
-                }
-            }
+            marginRight: 50,
         },
         title: {
-            text: '充值金额分段曲线图'
+            text: '实时充值曲线图'
         },
         xAxis: {
             type: 'datetime',
-            tickPixelInterval: 50
+            title: {
+                text: 'time',
+            },
         },
-        yAxis: {title:{text:'在线人数'}},
-        tooltip: {
-            formatter: function() {
-                return '<b>' + this.series.name + '</b><br/>' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' + Highcharts.numberFormat(this.y, 2);
+        yAxis: {
+            title: {
+                text: '充值人数'
             }
         },
-        series: [{name:'斗地主普通场', data:initArray, selected: true,}, {name:'斗地主中级场', data:initArray, selected: true,}, {name:'斗地主高级场', data:initArray, selected: true,}, {name:'斗地主贵宾场', data:initArray, selected: true,}],
-        legend: {
-            symbolPadding: 20,
-            symbolWidth: 0
-        },
+        series: [
+            {
+                name: '金额',
+            },
+        ],
         plotOptions: {
             series: {
                 marker: {
-                    enabled: false, //表示是否有数据点
-                },
-                showCheckbox:true, //表示是否要显示复选框，该选项与series：中的selected配合使用。
-                events :{
-                    checkboxClick: function(event) { //表示复选框的选择与取消都可以显示和隐藏所表示的数据。
-                        if(event.checked==true) {
-                            this.show();
-                        }
-                        else {
-                            this.hide();
-                        }
-                    },
-                },
-            },
-        },
-    }); 
+                    enabled: false,
+                }
+            }
+        }
+    });
+    
     chart.reflow();
-    chart2.reflow();
+    setInterval(generateData, 1000);
 
-    // var data = [
-    //     [
-    //         "Tiger Nixon",
-    //         "System Architect",
-    //         "Edinburgh",
-    //         "5421",
-    //         "2011/04/25",
-    //         "$3,120"
-    //     ],
-    //     [
-    //         "Garrett Winters",
-    //         "Director",
-    //         "Edinburgh",
-    //         "8422",
-    //         "2011/07/25",
-    //         "$5,300"
-    //     ]
-    // ];
-    // var data = [
-    //     {
-    //         "name":       "Tiger Nixon",
-    //         "position":   "System Architect",
-    //         "salary":     "$3,120",
-    //         "start_date": "2011/04/25",
-    //         "office":     "Edinburgh",
-    //         "extn":       "5421"
-    //     },
-    //     {
-    //         "name":       "Garrett Winters",
-    //         "position":   "Director",
-    //         "salary":     "$5,300",
-    //         "start_date": "2011/07/25",
-    //         "office":     "Edinburgh",
-    //         "extn":       "8422"
-    //     }
-    // ];
     var data = [
         [
             "1",
@@ -208,17 +100,26 @@ $(function () {
     ];
     console.log("Begin to render table.");
     $('#example').DataTable({
-        data:data,
-        columns: [
+        "data":data,
+        "columns": [
                 { 'title': '序号' },
                 { 'title': '时间点' },
                 { 'title': '充值人数' },
                 { 'title': '充值金额' },
             ],
-        paging: false,
-        searching: false,
-        select: false,
+        "language": {
+            "lengthMenu": "每页 _MENU_ 条记录",
+            "zeroRecords": "没有找到记录",
+            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+            "infoEmpty": "无记录",
+            "infoFiltered": "(从 _MAX_ 条记录过滤)"
+        },
+        "paging": false,
+        "searching": false,
+        "select": false,
+        "ordering": false,
     });
+    $('#example').colResizable();
 
     $(".tabs li").click(function () { 
       if ($(this).hasClass("active")){
@@ -231,14 +132,27 @@ $(function () {
               $('.'+$chooseDataType).removeClass("none");
           }
       });
-    // $(window).resize(function(){
-    //     console.log("windows size changed.");
-    //     //window.onresize = moveCheckboxBeforeLegend;  
-    //     moveCheckboxBeforeLegend(); 
-    // });
 });
 
-// window.onload=function(){  
-//     window.onresize = moveCheckboxBeforeLegend;  
-//     moveCheckboxBeforeLegend();  
-// }
+var generateData = function () {
+    console.log("Send once request.");
+    $.ajax({
+        type:"POST",
+        url: "/data/realtime_charge",
+        async: false,
+        error: function() {
+            console.log("Get charge info error.");
+        },
+        success: function (data) {
+            console.log(data);
+            var jsonData = JSON.parse(data);
+            var time = parseInt(jsonData['time']);
+            var chargeAmount = parseInt(jsonData['money']);
+            var chart_money = $('#container1').highcharts();
+            chart_money.series[0].addPoint([time, chargeAmount], true, false);
+            if (chart_money.series[0].data.length > 1000) {
+                chart_money.series[0].removePoint(0);
+            }
+        }
+    });
+};

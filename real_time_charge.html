@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>Charge</title>
     <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-    <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script> -->
-    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/highcharts.js"></script>
-    <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/heatmap.js"></script> -->
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/heatmap.js"></script>
     <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
     <script src="public/javascript/charge.js"></script>
@@ -31,55 +32,9 @@
             </nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
-         <div class="box search_box">
-            <div class="choosedata_wraper">
-                <div class="chooseDateType">
-                    <ul class="tabs">
-                        <li for="choosedata_easy " class="active"><span>&nbsp简单1</span></li>
-                        <li for="choosedata_more"><span>&nbsp更多1</span></li>
-                    </ul>
-                </div>
-                <div class="choosedata choosedata_easy">
-                    <div class="dropdown">
-                        <select name="time" class="dropdown-select">
-                            <option value="">选择查询时间点</option>
-                            <option value="1">昨天</option>
-                            <option value="2">本周</option>
-                            <option value="3">上周</option>
-                            <option value="4">最近30天</option>
-                            <option value="5">上月</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="choosedata choosedata_more none">
-                    <label for="begindata">开始日期</label>
-                    <input class="input" id="begindata" type="text" onfocus="WdatePicker();" />
-                    <label for="enddata">结束日期</label>
-                    <input class="input" id="enddata" type="text" onfocus="WdatePicker();" />
-                </div>
-
-                <div class="chooseVersion">
-                    <div class="dropdown">
-                        <select name="version" class="dropdown-select">
-                            <option value="">选择版本</option>
-                            <option value="1">1.0</option>
-                            <option value="2">1.1</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="search">
-                    <input type="button" class="button button-blue" value="查询" />
-                </div>
-            </div>
-        </div>
         <div class="box chart_box">
             <div class="chart_title"><span>总图形展示</span></div>
             <div id="container1"></div>
-        </div>
-
-        <div class="box chart_box">
-            <div class="chart_title"><span>按照房间统计</span></div>
-            <div id="container2"></div>
         </div>
 
         <div class="box">
