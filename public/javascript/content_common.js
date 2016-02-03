@@ -1,55 +1,64 @@
 $(function () {
-
     $(".nav_box .refresh_button").click(function () {
         console.log("reload");
         window.location.reload();
     });
 
-    // var data = [
-    //     [
-    //         "1",
-    //         "2015-05-01 00:00",
-    //         "1000",
-    //         "爱贝",
-    //     ]
-    // ];
-    // console.log("Begin to render table.");
-    $('#example').DataTable({
-        data:[],
-        columns: [
-                { 'data': 'sequence', 'title': '序号' },
-                { 'data': 'date', 'title': '日期' },
-                { 'data': 'usernums', 'title': '新增用户数' },
-                { 'data': 'channel', 'title': '渠道' },
-            ],
-        "language": {
-            "lengthMenu": "每页 _MENU_ 条记录",
-            "zeroRecords": "没有找到记录",
-            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-            "infoEmpty": "无记录",
-            "infoFiltered": "(从 _MAX_ 条记录过滤)"
+    (function (H) {
+        H.wrap(H.Legend.prototype, 'positionCheckboxes', function (p, scrollOffset) {
+            var alignAttr = this.group.alignAttr,
+                translateY,
+                clipHeight = this.clipHeight || this.legendHeight;
+
+            if (alignAttr) {
+                translateY = alignAttr.translateY;
+                H.each(this.allItems, function (item) {
+                    var checkbox = item.checkbox,
+                        bBox = item.legendItem.getBBox(),
+                        top;
+
+                    if (checkbox) {
+                        top = (translateY + checkbox.y + (scrollOffset || 0) + 3);
+                        H.css(checkbox, {
+                            left: (alignAttr.translateX + item.checkboxOffset + checkbox.x - 60 - bBox.width) + 'px',
+                            top: top + 'px',
+                            display: top > translateY - 6 && top < translateY + clipHeight - 6 ? '' : 'none'
+                        });
+                    }
+                });
+            }
+        });
+    })(Highcharts);;
+
+    Highcharts.setOptions({
+        global : {
+            useUTC : false
         },
-        paging: false,
-        searching: false,
-        select: false,
+        lang: {
+            rangeSelectorZoom: "选择时间段",
+            printChart: "打印该图片",
+            downloadJPEG: "下载jpeg格式图片",
+            downloadPDF: "下载pdf文件",
+            downloadPNG: "下载png格式图片",
+            downloadSVG: "下载svg格式图片",
+        }
     });
 
-    $(".tabs li").click(function () { 
-      if ($(this).hasClass("active")){
-                                  
-          } else {  
-            $(this).siblings().removeClass("active");
-              $(this).addClass("active");
-              $chooseDataType = $(this).attr("for");
-              $(".choosedata").addClass("none");
-              $('.'+$chooseDataType).removeClass("none");
-          }
-      });
+    $(".chooseDateType span").click(function(){
+        $hidden = $(this).parent().find('.none');
+        $show = $(this).parent().find('.active');
+        $hidden.removeClass('none').addClass('active');
+        $show.removeClass('active').addClass('none');
+        $chooseDataType = $hidden.attr("for");
+        console.log($chooseDataType);
+        $(".choosedata").addClass("none");
+        $('.'+$chooseDataType).removeClass("none");
+    });
+})
 
-});
-function search () {
+function getDate (date) {
     console.log("search button click.");
-    var activetab = $(".chooseDateType .tabs .active").attr("for");
+    var activetab = $(".chooseDateType .active").attr("for");
     console.log(activetab);
     var startDate, endDate;
     if ("choosedata_easy" == activetab) {
@@ -112,15 +121,19 @@ function search () {
     }
     console.log(startDate);
     console.log(endDate);
-    $.ajax({
-        type: 'POST',
-        url: "/data/channel",
-        success: function(data) {
-            console.log(data);
-            var table = $("#example").DataTable();
-            table.clear();
-            table.rows.add(data).draw();
-        }
-    })
+    date["startDate"] = startDate;
+    date["endDate"] = endDate;
 }
 
+var date = {};
+function search (data_kind) {
+    console.log(data_kind);
+    getDate(date);
+    console.log(date["startDate"]);
+    console.log(date["endDate"]);
+    $.ajax({
+        type: 'POST',
+        url: '/data/' + data_kind,
+        success: callbacksuccess,
+    })
+}

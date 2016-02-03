@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Summary Data</title>
+    <title>Total Count</title>
     <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
-    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-    <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/modules/exporting.js"></script> -->
-    <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/highcharts.js"></script>
-    <!-- // <script type="text/javascript" src="http://code.highcharts.com/3.0.7/highcharts.js"></script> -->
-    <!-- // <script type="text/javascript" src="public/lib/Highcharts-4.2.1/js/heatmap.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script>
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
-    <script type="text/javascript" src="public/javascript/total_count.js"></script>
 </head>
 
 <body>
@@ -30,13 +30,11 @@
             </nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
-        <div class="box search_box">
+        <div class="search_box">
             <div class="choosedata_wraper">
                 <div class="chooseDateType">
-                    <ul class="tabs">
-                        <li for="choosedata_easy " class="active"><span href="#">&nbsp简单</span></li>
-                        <li for="choosedata_more"><span href="#">&nbsp更多</span></li>
-                    </ul>
+                    <span for="choosedata_more" class="none">简单时间段查询</span>
+                    <span for="choosedata_easy" class="active">精确时间段查询</span>
                 </div>
                 <div class="choosedata choosedata_easy">
                     <div class="dropdown">
@@ -67,7 +65,7 @@
                     </div>
                 </div>
                 <div class="search">
-                    <input type="button" class="button button-blue" value="查询" />
+                    <input type="button" class="button button-blue" value="查询" onclick="search('total_count')" />
                 </div>
             </div>
         </div>
@@ -76,6 +74,39 @@
             <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
         </div>
     </div>
+    <script type="text/javascript">
+    $(function () {
+        $('#search_result_table').DataTable({
+            "data":[],
+            "columns": [
+                { 'title': '日期' },
+                { 'title': '道具' },
+                { 'title': '购买金额' },
+                { 'title': '购买数' },
+                { 'title': '消耗数' },
+                { 'title': '剩余数' },
+            ],
+            "language": {
+                "lengthMenu": "每页 _MENU_ 条记录",
+                "zeroRecords": "没有找到记录",
+                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)"
+            },
+            "paging": true,
+            "searching": false,
+            "select": false,
+            "scrollX": true,
+        });
+        $('#search_result_table').colResizable();
+    });
+    function callbacksuccess (data) {
+        console.log(data);
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(data).draw();
+    }
+    </script>
 </body>
 
 </html>

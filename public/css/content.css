@@ -42,17 +42,12 @@ body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica,
 
 
 /*search box*/
-.choosedata_wraper { width: 100%; height: 100%; border-radius: 7px 7px 7px 7px; background: #dee5f4; -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); }
-.chooseDateType { float: left; width: 36px; height: 100%; background: #59afd2; border-radius: 7px 0 0 7px; }
-.choosedata { float: left; width: 300px; height: 100%; padding-top: 33px; padding-left: 30px; }
-.chooseVersion { float: left; width: 200px; height: 100%; padding-top: 33px; }
-.search { float: left; width: 100px; height: 100%; padding-top: 33px; border-radius: 0 7px 7px 0; }
-.choosedata_easy { width: 200px; }
-.choosedata_more { width: 400px; }
+.choosedata_wraper { width: 750px; height: 100%; margin: 0 auto;  }
+.chooseDateType { padding-top: 37px; float: left; width: auto; height: 100%; margin:0 10px; }
+.choosedata { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
+.chooseVersion { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
+.search { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
+
+.chooseDateType span { cursor: pointer; text-decoration: underline; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }
+.chooseDateType span:hover { color:black;  }
 .none { display: none; }
-.chooseDateType .tabs { border-radius: 7px 0 0 7px; list-style: none; margin: 0; padding: 0; border-bottom: 1px solid #79bedb; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
-.chooseDateType .tabs span { vertical-align: baseline; text-decoration: none; display: inline-block; line-height: 36px; width: 36px; height: 36px; border-top: 1px solid #79bedb; border-top: 1px solid rgba(255, 255, 255, 0.15); border-bottom: 1px solid #3497bf; }
-.tabs span:hover { background: #79bedb; }
-.tabs li:first-child span { border-top: 0; border-radius: 7px 0 0 0; }
-.tabs .active span, .tabs span:active { z-index: 2; background: #dee5f4; cursor: default; }
-.tabs:active .active span:not(:active) { background: none; }

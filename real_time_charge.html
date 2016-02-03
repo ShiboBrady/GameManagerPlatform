@@ -8,13 +8,13 @@
     <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
     <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
-    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/heatmap.js"></script>
-    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script>
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
-    <script src="public/javascript/charge.js"></script>
 </head>
 
 <body>
@@ -39,9 +39,122 @@
 
         <div class="box">
             <div class="chart_title"><span>查询结果</span></div>
-            <table id="example" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
         </div>
     </div>
+    <script type="text/javascript">
+        $(function () {
+            var chart = new Highcharts.StockChart({
+                chart: {
+                    renderTo: 'container1',
+                    type:'spline',
+                    marginRight: 50,
+                },
+                title: {
+                    text: '实时充值曲线图'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    title: {
+                        text: 'time',
+                    },
+                },
+                yAxis: {
+                    title: {
+                        text: '充值人数'
+                    }
+                },
+                series: [
+                    {
+                        name: '金额',
+                    },
+                ],
+                plotOptions: {
+                    series: {
+                        marker: {
+                            enabled: false,
+                        }
+                    }
+                },
+                credits: {enabled:false},
+            });
+            
+            chart.reflow();
+            setInterval(generateData, 1000);
+
+            var data = [
+                [
+                    "1",
+                    "2015-05-01 00:00",
+                    "10",
+                    "50",
+                ],
+                [
+                    "2",
+                    "2015-05-01 00:02",
+                    "20",
+                    "100",
+                ],
+                [
+                    "3",
+                    "2015-05-01 00:04",
+                    "30",
+                    "150",
+                ],
+            ];
+            console.log("Begin to render table.");
+            $('#search_result_table').DataTable({
+                "data":data,
+                "columns": [
+                        { 'title': '序号' },
+                        { 'title': '时间点' },
+                        { 'title': '充值人数' },
+                        { 'title': '充值金额' },
+                    ],
+                "language": {
+                    "lengthMenu": "每页 _MENU_ 条记录",
+                    "zeroRecords": "没有找到记录",
+                    "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                    "infoEmpty": "无记录",
+                    "infoFiltered": "(从 _MAX_ 条记录过滤)"
+                },
+                "paging": false,
+                "searching": false,
+                "select": false,
+                "ordering": false,
+            });
+            $('#search_result_table').colResizable();
+        });
+        var x = [];
+        var generateData = function () {
+            console.log("Send once request.");
+            $.ajax({
+                type:"POST",
+                url: "/data/realtime_charge",
+                async: false,
+                error: function() {
+                    console.log("Get charge info error.");
+                },
+                success: function (data) {
+                    console.log(data);
+                    var jsonData = JSON.parse(data);
+                    var time = parseInt(jsonData['time']);
+                    var chargeAmount = parseInt(jsonData['money']);
+                    var chart_money = $('#container1').highcharts();
+                    chart_money.series[0].addPoint([time, chargeAmount], true, false);
+                    if (chart_money.series[0].data.length <= 25) {
+                        x.push(time);
+                    }
+                    if (chart_money.series[0].data.length == 25) {
+                        chart_money.xAxis[0].setExtremes(x[x.length - 20], time);
+                    }
+                    if (chart_money.series[0].data.length > 1000) {
+                        chart_money.series[0].removePoint(0);
+                    }
+                }
+            });
+        };
+    </script>
 </body>
 
 </html>
