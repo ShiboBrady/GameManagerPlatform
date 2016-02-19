@@ -6,7 +6,8 @@ body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica,
 #wraper { width: 95%; margin: 0 auto 50px auto; }
 .nav_box {width: 100%; height: 30px; margin-bottom: 20px;}
 .box { width: 100%; border-radius: 5px; margin: 20px 0; background-color: #eff9fd; /*background-image: -webkit-linear-gradient(top, #fafafa, #e1e1e1); background-image: -moz-linear-gradient(top, #fafafa, #e1e1e1); background-image: -o-linear-gradient(top, #fafafa, #e1e1e1); background-image: linear-gradient(to bottom, #fafafa, #e1e1e1);*/ -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); border: 1px solid #c0c0c8; }
-.search_box { color: #555860; height: 100px; overflow: hidden; background: none; }
+.search_box { color: #555860; height: 40px; height: 100px; overflow: hidden; background: none;}
+.search-box { z-index: 1000; color: #555860; height: 40px; background: none;}
 .chart_box {}
 .table_box {}
 
@@ -17,7 +18,7 @@ body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica,
 .nav_box a:hover { background-color: #FFEBCD;}
 
 /*button*/
-.button { position: relative; display: inline-block; height: 36px; line-height: 35px; padding: 0 20px; font-size: 13px; color: white; text-align: center; text-decoration: none; text-shadow: 0 -1px rgba(0, 0, 0, 0.4); background-clip: padding-box; border: 1px solid; border-radius: 2px; cursor: pointer; -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); }
+.button { position: relative; display: inline-block; height: 28px; line-height: 28px; padding: 0 20px; font-size: 13px; color: white; text-align: center; text-decoration: none; text-shadow: 0 -1px rgba(0, 0, 0, 0.4); background-clip: padding-box; border: 1px solid; border-radius: 2px; cursor: pointer; -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); }
 .button:before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; right: 0; pointer-events: none; background-image: -webkit-radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: -moz-radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: -o-radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); }
 .button:hover:before { background-image: -webkit-radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); background-image: -moz-radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); background-image: -o-radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); background-image: radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); }
 .button:active { -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2); box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2); }
@@ -42,12 +43,162 @@ body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica,
 
 
 /*search box*/
-.choosedata_wraper { width: 750px; height: 100%; margin: 0 auto;  }
+.choosedata_wraper { width: 900px; height: 100%; margin: 0 auto; }
 .chooseDateType { padding-top: 37px; float: left; width: auto; height: 100%; margin:0 10px; }
-.choosedata { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
-.chooseVersion { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
+.choosedata { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px;}
+.chooseVersion { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px;}
 .search { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
+
+.choose-version { float: left; width: auto; height: 100%; /*margin: 10px 0 0 10px;*/}
+.choose-version label {display: block;}
+.search-button { float: left; width: auto; height: 100%; margin:10px 0 0 10px; }
 
 .chooseDateType span { cursor: pointer; text-decoration: underline; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }
 .chooseDateType span:hover { color:black;  }
 .none { display: none; }
+
+
+div.choose-date {
+    font: 16px/20px "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
+    float: left; width: auto; height: 40px;
+    position: relative;z-index: 1000;
+}
+div.dateshow {
+    position: relative;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    border:1px solid black;
+}
+
+div.datepeaker {
+    position: absolute;
+    top: 41px;
+    width: 300px;
+    height: 130px;
+    border-radius: 5px;
+    border:1px solid black;
+    padding: 0;
+    clear: both;
+    background: #fff;
+}
+
+div.dateshow .date{
+    float: left;
+    width: 250px;
+    height: 100%;
+    border-right: 1px solid black;
+    line-height: 40px;
+    background: url(./calendar.jpg) no-repeat 0 center;
+    background-size: 25px 25px;
+}
+
+div.dateshow .date .date_display {
+    margin-left: 40px;
+}
+
+div.dateshow .arrow_box {
+    height: 100%;
+    position: absolute;
+    left: 251px;
+    right: 0px;
+    top: 0px;
+}
+
+div.dateshow .arrow_box .arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 18px;
+    left: 15px;
+    border: 8px solid transparent;
+    border-top: 8px solid black;
+}
+
+div.datepeaker .easy {
+    position: relative;
+    width: 100%;
+    height: 35px;
+    background: #c0d4eb;
+    margin: 0;
+    border:0;
+    border-radius: 5px 5px 0 0;
+}
+
+div.datepeaker .easy ul {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: 0 0 0 20px;
+    padding: 8px 0;
+    list-style: none;
+    line-height: 23px;
+}
+
+div.datepeaker .easy ul li {
+    display: inline-block;
+    border-right: 1px solid black;
+    height: 100%;
+    padding: 0 5px 5px 0;
+}
+
+div.datepeaker .easy ul li:last-child {
+    border-right: 0;
+}
+
+div.datepeaker .easy ul li:hover {
+    cursor: pointer;
+}
+
+div.datepeaker .more-date {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    padding: 20px 0;
+}
+
+div.datepeaker .more-date input[type="text"] {
+    width: 100px;
+    border: 1px solid;
+    border-radius: 3px;
+    border-color: #a8acbc;
+    box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc;
+}
+
+div.datepeaker .confirm-button {
+    position: relative;
+    width: 50%;
+    height: 40px;
+    margin: -20px auto;
+}
+
+div.datepeaker .confirm-button input[type="button"] {
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+div.datepeaker .confirm-button input[type="button"].confirm {
+    background: #5ca934;
+    border-bottom: 2px solid #009999;
+    -webkit-box-shadow: inset 0 -2px #009999;
+    box-shadow: inset 0 -2px #009999;
+}
+div.datepeaker .confirm-button input[type="button"].cancel {
+    background: #f0776c;
+    border-bottom: 2px solid #d76b60;
+    -webkit-box-shadow: inset 0 -2px #d76b60;
+    box-shadow: inset 0 -2px #d76b60;
+}
+div.datepeaker .confirm-button input[type="button"]:active {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: transparent;
+}

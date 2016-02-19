@@ -27,7 +27,7 @@ body {
     z-index: 1;
 }
 .loginform {
-    margin: 220px auto;
+    margin: 220px auto 10px;
     padding: 18px 20px;
     width: 400px;
     font: 12px/20px 'Lucida Grande', Verdana, "Microsoft YaHei", sans-serif;
@@ -110,4 +110,9 @@ body {
     background: #a4c2f3;
     -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.1);
+}
+
+span.username-errormsg, span.userpwd-errormsg {
+    color: red;
+    font-weight: bold;
 }

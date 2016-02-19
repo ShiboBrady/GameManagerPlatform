@@ -32,7 +32,7 @@
             </nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
-        <div class="search_box">
+        <!-- <div class="search_box">
             <div class="choosedata_wraper">
                 <div class="chooseDateType">
                     <span for="choosedata_more" class="none">简单时间段查询</span>
@@ -56,7 +56,7 @@
                     <label for="enddata">结束日期</label>
                     <input class="input" id="enddate" type="text" onfocus="WdatePicker();" />
                 </div>
-
+                
                 <div class="chooseVersion">
                     <div class="dropdown">
                         <select name="one" class="dropdown-select">
@@ -69,6 +69,60 @@
                 <div class="search">
                     <input type="button" class="button button-blue" value="查询" onclick="search('channel');" />
                 </div>
+            </div>
+        </div> -->
+
+        <div class="search-box">
+            <div class="choose-date">
+                <div class="dateshow">
+                    <div class="date">
+                        <div class="date_display">
+                            <span>2016-02-12</span>
+                            <span>~</span>
+                            <span>2016-02-19</span>
+                        </div>
+                    </div>
+                    <div class="arrow_box"><div class="arrow"></div></div>
+                </div>
+                <div class="datepeaker">
+                    <div class="easy">
+                        <ul>
+                            <li>昨天</li>
+                            <li>本周</li>
+                            <li>上周</li>
+                            <li>最近30天</li>
+                            <li>上月</li>
+                        </ul>
+                    </div>
+                    <div class="more-date">
+                        <label>自定</label>
+                        <input type="text">
+                        <label>到</label>
+                        <input type="text">
+                    </div>
+                    <div class="confirm-button">
+                        <input class="confirm" type="button" value="确定">
+                        <input class="cancel" type="button" value="取消">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="choose-version">
+                <label>请选择版本</label>
+                <div class="dropdown">
+                    
+                    <select name="one" class="dropdown-select">
+                        <option value="1">1.0</option>
+                        <option value="2">1.1</option>
+                        <option value="2">1.1</option>
+                        <option value="2">1.1</option>
+                        <option value="2">1.1</option>
+                        <option value="2">1.1</option>
+                        <option value="2">1.1</option>
+                    </select>
+                </div>
+            </div> -->
+            <div class="search-button">
+                <input type="button" class="button button-blue" value="查询" onclick="search('channel');" />
             </div>
         </div>
         <div class="box">

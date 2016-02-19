@@ -54,6 +54,16 @@ $(function () {
         $(".choosedata").addClass("none");
         $('.'+$chooseDataType).removeClass("none");
     });
+
+    $(".search-box .arrow").click(function(){
+        if ($(".search-box .datepeaker").hasClass("none1")){
+            $(".search-box .datepeaker").removeClass("none1");
+            $(".search-box .datepeaker").slideDown("1000");
+        } else {
+            $(".search-box .datepeaker").addClass("none1");
+            $(".search-box .datepeaker").slideUp("1000");
+        }
+    });
 })
 
 function getDate (date) {

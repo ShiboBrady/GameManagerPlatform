@@ -31,7 +31,7 @@ $(function () {
           changeTabListAndMoreTabListWhenWidowsSizeChanged();
     });
 
-    $("#right_part .tabbed ul").on('click', 'span', function () {
+    $("#right_part .tabbed ul").on('click', '.title', function () {
         console.log("tablist span click.");
         var show_nav_list = $("#right_part .tabbed ul li"); 
         var index = show_nav_list.index($(this).parent());
@@ -42,15 +42,6 @@ $(function () {
         show_nav_list.removeClass("active").eq(index).addClass("active");
         var iframe_box = $("#right_part .show_iframe");
         iframe_box.find(".iframe_content").hide().eq(index).show();
-    });
-
-    $("#right_part .more_tab ul").on('click', 'span', function () {
-        console.log("more_tab span click.");
-        var show_nav_list = $("#right_part .more_tab ul li");
-        var index = show_nav_list.index($(this).parent());
-        var tablistsize = $("#right_part .tabbed ul li").size();
-        console.log("iframe_box: " + tablistsize + " display.");
-        $("#right_part .show_iframe .iframe_content").hide().eq(tablistsize + index).show();
     });
 
     $("#right_part .tabbed ul").on('click', '.close', function () {
@@ -67,6 +58,41 @@ $(function () {
             iframe_box.find(".iframe_content").eq(tabIndex - 1).show();
         }
         moveItemFromMoreTabListIntoTabList();
+    });
+
+    $("#right_part .more_tab ul").on('click', '.title', function () {
+        console.log("more_tab span click.");
+        var show_nav_list = $("#right_part .more_tab ul li");
+        var index = show_nav_list.index($(this).parent());
+        var tablistsize = $("#right_part .tabbed ul li").size();
+        console.log("iframe_box: " + tablistsize + " display.");
+        show_nav_list.removeClass("active");
+        $(this).parent().addClass("active");
+        $("#right_part .show_iframe .iframe_content").hide().eq(tablistsize + index).show();
+        $(".arrow_box").removeClass("up");
+        $(".arrow_box").addClass("down");
+        $(".more_tab").slideUp("1000");
+    });
+
+    $("#right_part .more_tab ul").on('click', '.close', function() {
+        console.log('more_tab close click.');
+        var show_nav_list = $("#right_part .more_tab ul li");
+        var nav_size = show_nav_list.size();
+        var index = show_nav_list.index($(this).parent());
+        var tablistsize = $("#right_part .tabbed ul li").size();
+        var closeIndex = tablistsize + index;
+        console.log("iframe_box: " + closeIndex + " close.");
+        if ($(this).parent().hasClass("active")) {
+            $("#right_part .tabbed ul li:last-child").addClass("active");
+            $("#right_part .show_iframe .iframe_content").eq(tablistsize - 1).show();
+        } 
+        $("#right_part .show_iframe .iframe_content").eq(closeIndex).remove();
+        $(this).parent().remove();
+
+        if (nav_size == 1) {
+            $(".arrow_box").removeClass("down up");
+            $(".more_tab").hide();
+        }
     });
     
     //更多菜单箭头
@@ -120,7 +146,7 @@ function moveItemFromMoreTabListIntoTabList () {
     href = moreTabListFirstChild.find('span').attr('page_href');
     titleName = moreTabListFirstChild.find('span').text();
     if (href == "home.html") {
-        tabList.append('<li><span class="title" page_href="' + href + '">' + titleName + '</span></li>');
+        tabList.append('<li><span class="title" page_href="' + href + '">' + titleName + '</span><span class="close"><span></li>');
     } else {
         tabList.append('<li><span class="title" page_href="' + href + '">' + titleName + '</span><span class="close"><span></li>');
     }
@@ -141,10 +167,10 @@ function moveItemFromTabListIntoMoreTabList () {
     href = tabListLastChild.find('span').attr('page_href');
     titleName = tabListLastChild.find('span').text();
     if (moreTabList.size() == 0) {
-        $(".more_tab ul").append('<li><span class="title" page_href="' + href + '">' + titleName + '</span></li>');
+        $(".more_tab ul").append('<li><span class="title" page_href="' + href + '">' + titleName + '</span><span class="close"><span></li>');
     } else {
         var moreTabListFirstChild = $(".more_tab ul li:first-child");
-        moreTabListFirstChild.before('<li><span class="title" page_href="' + href + '">' + titleName + '</span></li>');
+        moreTabListFirstChild.before('<li><span class="title" page_href="' + href + '">' + titleName + '</span><span class="close"><span></li>');
     }    
     tabListLastChild.remove();
     
@@ -234,7 +260,8 @@ function createIframe (href, titleName) {
             console.log("Show the arrow_box.");
         }
         console.log("Add item in more_tab.");
-        $(".more_tab ul").append('<li><span class="title" page_href="' + href + '">' + titleName + '</span></li>');
+        $(".more_tab ul li").removeClass("active");
+        $(".more_tab ul").append('<li class="active"><span class="title" page_href="' + href + '">' + titleName + '</span><span class="close"><span></li>');
     } else {
         //add to tab
         console.log("Add item in tab list.");

@@ -388,7 +388,7 @@ header #userInfo a:hover {
 
 .more_tab {
 	position: absolute;
-	width: 180px;
+	width: 150px;
 	top:31px;
 	right: 0;
 	display: none;
@@ -400,11 +400,12 @@ header #userInfo a:hover {
 	border-radius: 0 0 5px 5px;
 }
 .more_tab ul li {
-	height: 35px; /*line-height:24px; text-indent:10px*/
+	height: 30px; /*line-height:24px; text-indent:10px*/
 	border-bottom: 1px solid #c0c0c8;
 	border-radius: 7px 7px 7px 7px;
 	background: #a8bddf;
 	padding: 10px 0 0 10px;
+	position: relative;
 }
 
 .more_tab ul li span {
@@ -416,8 +417,12 @@ header #userInfo a:hover {
 }
 
 .more_tab ul li .close {
-	top: 9px;
-	right: 8px;
 	position: absolute;
+	top: 12px;
+	right: 12px;
 	z-index: 4;
+}
+
+.more_tab ul li .close:hover {
+	color: red;
 }
