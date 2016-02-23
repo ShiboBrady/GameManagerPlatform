@@ -7,7 +7,7 @@ body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica,
 .nav_box {width: 100%; height: 30px; margin-bottom: 20px;}
 .box { width: 100%; border-radius: 5px; margin: 20px 0; background-color: #eff9fd; /*background-image: -webkit-linear-gradient(top, #fafafa, #e1e1e1); background-image: -moz-linear-gradient(top, #fafafa, #e1e1e1); background-image: -o-linear-gradient(top, #fafafa, #e1e1e1); background-image: linear-gradient(to bottom, #fafafa, #e1e1e1);*/ -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); border: 1px solid #c0c0c8; }
 .search_box { color: #555860; height: 40px; height: 100px; overflow: hidden; background: none;}
-.search-box { z-index: 1000; color: #555860; height: 40px; background: none;}
+.search-box { color: #555860; height: 40px; background: none;}
 .chart_box {}
 .table_box {}
 
@@ -89,7 +89,7 @@ div.dateshow .date{
     height: 100%;
     border-right: 1px solid black;
     line-height: 40px;
-    background: url(./calendar.jpg) no-repeat 0 center;
+    background: url(../images/calendar.jpg) no-repeat 0 center;
     background-size: 25px 25px;
 }
 
@@ -147,15 +147,40 @@ div.datepeaker .easy ul li:last-child {
     border-right: 0;
 }
 
-div.datepeaker .easy ul li:hover {
+div.datepeaker .easy ul li:hover, div.dateshow:hover {
     cursor: pointer;
+}
+
+div.datepeaker .errorinfo{
+    position: relative;
+    width: 100%;
+    height: 20px;
+}
+
+div.datepeaker .errorinfo span {
+    display: inline-block;
+    font-size: 12px;
+    color: red;
+}
+
+div.datepeaker .errorinfo .startdateerrormsg {
+    position: absolute;
+    left: 40px;
+    width: 100px;
+    display: none;
+}
+
+div.datepeaker .errorinfo .enddateerrormsg {
+    position: absolute;
+    left: 160px;
+    width: 100px;
+    display: none;
 }
 
 div.datepeaker .more-date {
     position: relative;
     width: 100%;
     height: 40px;
-    padding: 20px 0;
 }
 
 div.datepeaker .more-date input[type="text"] {
@@ -170,7 +195,7 @@ div.datepeaker .confirm-button {
     position: relative;
     width: 50%;
     height: 40px;
-    margin: -20px auto;
+    margin: 0 auto;
 }
 
 div.datepeaker .confirm-button input[type="button"] {
@@ -187,14 +212,14 @@ div.datepeaker .confirm-button input[type="button"] {
 div.datepeaker .confirm-button input[type="button"].confirm {
     background: #5ca934;
     border-bottom: 2px solid #009999;
-    -webkit-box-shadow: inset 0 -2px #009999;
-    box-shadow: inset 0 -2px #009999;
+    -webkit-box-shadow: inset 0 -1px #009999;
+    box-shadow: inset 0 -1px #009999;
 }
 div.datepeaker .confirm-button input[type="button"].cancel {
     background: #f0776c;
     border-bottom: 2px solid #d76b60;
-    -webkit-box-shadow: inset 0 -2px #d76b60;
-    box-shadow: inset 0 -2px #d76b60;
+    -webkit-box-shadow: inset 0 -1px #d76b60;
+    box-shadow: inset 0 -1px #d76b60;
 }
 div.datepeaker .confirm-button input[type="button"]:active {
     outline: none;
