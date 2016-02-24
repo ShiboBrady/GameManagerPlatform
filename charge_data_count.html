@@ -32,43 +32,46 @@
             </nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
-        <div class="search_box">
-            <div class="choosedata_wraper">
-                <div class="chooseDateType">
-                    <span for="choosedata_more" class="none">简单时间段查询</span>
-                    <span for="choosedata_easy" class="active">精确时间段查询</span>
+        <div class="search-box">
+            <div class="choose-date">
+                <div class="dateshow">
+                    <div class="date">
+                        <div class="date_display">
+                            <span class="display-startdate"></span>
+                            <span>~</span>
+                            <span class="display-enddate"></span>
+                        </div>
+                    </div>
+                    <div class="arrow_box"><div class="arrow"></div></div>
                 </div>
-                <div class="choosedata choosedata_easy">
-                    <div class="dropdown">
-                        <select name="one" class="dropdown-select">
-                            <option value="">选择查询时间点</option>
-                            <option value="1">昨天</option>
-                            <option value="2">本周</option>
-                            <option value="3">上周</option>
-                            <option value="4">最近30天</option>
-                            <option value="5">上月</option>
-                        </select>
+                <div class="datepeaker none">
+                    <div class="easy">
+                        <ul>
+                            <li value="yesterday">昨天</li>
+                            <li value="thisweek">本周</li>
+                            <li value="lastweek">上周</li>
+                            <li value="lastthiryday">最近30天</li>
+                            <li value="lastmonth">上月</li>
+                        </ul>
+                    </div>
+                    <div class="errorinfo">
+                        <span class="startdateerrormsg">日期格式不正确</span>
+                        <span class="enddateerrormsg">日期格式不正确</span>
+                    </div>
+                    <div class="more-date">
+                        <label>自定</label>
+                        <input type="text" id="begindate" onfocus="WdatePicker();">
+                        <label>到</label>
+                        <input type="text" id="enddate" onfocus="WdatePicker();">
+                    </div>
+                    <div class="confirm-button">
+                        <input class="confirm" type="button" value="确定">
+                        <input class="cancel" type="button" value="取消">
                     </div>
                 </div>
-                <div class="choosedata choosedata_more none">
-                    <label for="begindata">开始日期</label>
-                    <input class="input" id="begindata" type="text" onfocus="WdatePicker();" />
-                    <label for="enddata">结束日期</label>
-                    <input class="input" id="enddata" type="text" onfocus="WdatePicker();" />
-                </div>
-
-                <div class="chooseVersion">
-                    <div class="dropdown">
-                        <select name="one" class="dropdown-select">
-                            <option value="">选择版本</option>
-                            <option value="1">1.0</option>
-                            <option value="2">1.1</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="search">
-                    <input type="button" class="button button-blue" value="查询" onclick="search('charge_data_count')" />
-                </div>
+            </div>
+            <div class="search-button">
+                <input type="button" class="button button-blue" value="查询" onclick="search('charge_data_count');" />
             </div>
         </div>
         <div class="box">

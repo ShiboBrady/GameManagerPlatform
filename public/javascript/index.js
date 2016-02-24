@@ -1,21 +1,19 @@
 $(function () {
-    //console.log($("#right_part").width());
-    $(window).resize(function(){
-        console.log("windows size changed, new size is: " + $("#right_part").width());
-        changeTabListAndMoreTabListWhenWidowsSizeChanged();
-    });
-    var username = getUrlParam('name');
-    console.log("username: " + username);
-    $("#userInfo .userLoginName").html(username);
+    SetUserName(); //设置header中欢迎字段的用户名
 
-    $("#headerNav .nav li").click(function () {
+    $(window).resize(function(){ 
+        console.log("windows size changed, new size is: " + $("#right_part").width());
+        changeTabListAndMoreTabListWhenWidowsSizeChanged(); //当右边内容窗口大小改变时，调整打开页面标签的展示
+    });    
+
+    $("#headerNav .nav li").click(function () { //header中导航菜单点击后的效果
         $(this).siblings().removeClass("active").end().addClass("active");
         if ($(this).hasClass("nav_home")) {
             chooseTab($(this).find("a").attr("_href"), $(this).find("a").attr("page_title"));
         }
     });
 
-    $("#displayArrow").click(function() {
+    $("#displayArrow").click(function() { //隐藏左侧菜单按钮点击后的效果
           if($(this).hasClass("open"))
           {
               $(this).removeClass("open");
@@ -31,7 +29,7 @@ $(function () {
           changeTabListAndMoreTabListWhenWidowsSizeChanged();
     });
 
-    $("#right_part .tabbed ul").on('click', '.title', function () {
+    $("#right_part .tabbed ul").on('click', '.title', function () { //右侧打开页面tab点击后的效果
         console.log("tablist span click.");
         var show_nav_list = $("#right_part .tabbed ul li"); 
         var index = show_nav_list.index($(this).parent());
@@ -44,7 +42,7 @@ $(function () {
         iframe_box.find(".iframe_content").hide().eq(index).show();
     });
 
-    $("#right_part .tabbed ul").on('click', '.close', function () {
+    $("#right_part .tabbed ul").on('click', '.close', function () { //右侧打开页面tab上面的关闭按钮点击后的效果
         var tabIndex = $(this).parent().index();
         var show_nav = $("#right_part .tabbed ul li");
         var iframe_box = $("#right_part .show_iframe");
@@ -60,7 +58,7 @@ $(function () {
         moveItemFromMoreTabListIntoTabList();
     });
 
-    $("#right_part .more_tab ul").on('click', '.title', function () {
+    $("#right_part .more_tab ul").on('click', '.title', function () { //右侧下拉tab点击后的效果
         console.log("more_tab span click.");
         var show_nav_list = $("#right_part .more_tab ul li");
         var index = show_nav_list.index($(this).parent());
@@ -74,7 +72,7 @@ $(function () {
         $(".more_tab").slideUp("1000");
     });
 
-    $("#right_part .more_tab ul").on('click', '.close', function() {
+    $("#right_part .more_tab ul").on('click', '.close', function() { //右侧下拉tab上的关闭按钮点击后的效果
         console.log('more_tab close click.');
         var show_nav_list = $("#right_part .more_tab ul li");
         var nav_size = show_nav_list.size();
@@ -95,8 +93,7 @@ $(function () {
         }
     });
     
-    //更多菜单箭头
-    $(".arrow_box").click(function () {
+    $(".arrow_box").click(function () { //更多菜单箭头
         console.log("arrow_box");
         if ($(this).hasClass("down")) {
             $(".arrow_box").removeClass("down");
@@ -115,7 +112,7 @@ var eachLiMarginLeft = 30;
 var eachSpanMargin = 23;
 var marginRight = 50;
 
-function changeTabListAndMoreTabListWhenWidowsSizeChanged() {
+function changeTabListAndMoreTabListWhenWidowsSizeChanged() { //当窗口变化时，自动调整tab的位置
     var windowSize = $("#right_part").width();
     var eachWidth = spanWidthInit + eachSpanMargin * 2 + eachLiMarginLeft;
     var maxTabNum = parseInt((windowSize - marginRight) / eachWidth); 
@@ -136,7 +133,7 @@ function changeTabListAndMoreTabListWhenWidowsSizeChanged() {
     }
 }
 
-function moveItemFromMoreTabListIntoTabList () {
+function moveItemFromMoreTabListIntoTabList () {  //把tab从下拉tab移动到非下拉tab列表中（窗口变大）
     if (!($(".arrow_box").hasClass("down") || $(".arrow_box").hasClass("up"))) {
         return;
     }
@@ -157,7 +154,7 @@ function moveItemFromMoreTabListIntoTabList () {
     }
 }
 
-function moveItemFromTabListIntoMoreTabList () {
+function moveItemFromTabListIntoMoreTabList () {  //把tab从非下拉tab移动到下拉tab列表中（窗口变小）
     if (!($(".arrow_box").hasClass("down") || $(".arrow_box").hasClass("up"))) {
         $(".arrow_box").addClass("down");
     }
@@ -176,7 +173,7 @@ function moveItemFromTabListIntoMoreTabList () {
     
 }
 
-function isNeedShowMoreTabWhenAddTab () {
+function isNeedShowMoreTabWhenAddTab () { //当打开了一个新的页面时，判断是否需要放入到下拉tab列表中
     var windowSize = $("#right_part").width();
     var eachWidth = spanWidthInit + eachSpanMargin * 2 + eachLiMarginLeft;
     var maxTabNum = parseInt((windowSize - marginRight) / eachWidth); 
@@ -189,7 +186,7 @@ function isNeedShowMoreTabWhenAddTab () {
     }
 }
 
-function isNeedHideMoreTabWhenCloseTab () {
+function isNeedHideMoreTabWhenCloseTab () { //当关闭了一个tab时，判断是否需要
     var moreTabListNum = $(".more_tab ul").children().size();
     if (moreTabListNum > 0) {
         return false;
@@ -208,12 +205,12 @@ function getUrlParam(name){
     return null;  
 } 
 
-function leftmenu_click(href, title) {
+function leftmenu_click(href, title) { //当左侧菜单点击后发生的事情
     console.log("call parant func successed;");
     chooseTab(href, title);
 }
 
-function chooseTab (href, title) {
+function chooseTab (href, title) { //选择要显示一个已有的tab或者新建一个tab
     var tab_list = $("#right_part .tabbed ul li"); //所有的tab里的标签；
     var more_tab_list = $("#right_part .more_tab ul li"); //所有的more_tab里的标签；
     var isFound = false; //查找结果
@@ -251,7 +248,7 @@ function chooseTab (href, title) {
     };
 }
 
-function createIframe (href, titleName) {
+function createIframe (href, titleName) {  //新建一个tab，并加载对应的页面
     var show_nav = $("#right_part .tabbed ul");
     show_nav.find('li').removeClass("active");
     if ($(".arrow_box").hasClass("down") || $(".arrow_box").hasClass("up") || isNeedShowMoreTabWhenAddTab()) {
@@ -275,4 +272,10 @@ function createIframe (href, titleName) {
     iframe_box.append('<iframe class="iframe_content" name="iframe_content" src=' + href + ' width="100%" height="100%" frameborder="0" ></iframe>');   
     var showbox = iframebox.find(".iframe_content:visible");
     showbox.find("iframe").load();
+}
+
+function SetUserName(){
+    var username = getUrlParam('name');
+    console.log("username: " + username);
+    $("#userInfo .userLoginName").html(username);
 }

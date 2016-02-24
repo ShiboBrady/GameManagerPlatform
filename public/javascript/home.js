@@ -148,38 +148,41 @@ var data3 = [
 
 $(function () {
     $('#table1').DataTable({
-        'data': data1,
-        'columns': [
+        "data": data1,
+        "columns": [
             { 'data': '名词', 'title': '名词' },
             { 'data': '定义', 'title': '定义' },
         ],
-        paging: false,
-        searching: false,
-        select: false,
-        info: false,
+        "paging": false,
+        "searching": false,
+        "select": false,
+        "info": false,
+        "ordering": false,
     });
 
     $('#table2').DataTable({
-        data: data2,
-        columns: [
+        "data": data2,
+        "columns": [
             { 'data': '名词', 'title': '名词' },
             { 'data': '定义', 'title': '定义' },
         ],
-        paging: false,
-        searching: false,
-        select: false,
-        info: false,
+        "paging": false,
+        "searching": false,
+        "select": false,
+        "info": false,
+        "ordering": false,
     });
 
     $('#table3').DataTable({
-        data: data3,
-        columns: [
+        "data": data3,
+        "columns": [
             { 'data': '名词', 'title': '名词' },
             { 'data': '定义', 'title': '定义' },
         ],
-        paging: false,
-        searching: false,
-        select: false,
-        info: false,
+        "paging": false,
+        "searching": false,
+        "select": false,
+        "info": false,
+        "ordering": false,
     });
 });

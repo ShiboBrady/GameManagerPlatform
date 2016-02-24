@@ -1,10 +1,10 @@
 $(function () {
-    $(".nav_box .refresh_button").click(function () {
+    $(".nav_box .refresh_button").click(function () { //刷新按钮
         console.log("reload");
         window.location.reload();
     });
 
-    (function (H) {
+    (function (H) { //匿名函数，用来设置Highchart的复选框在文本前面
         H.wrap(H.Legend.prototype, 'positionCheckboxes', function (p, scrollOffset) {
             var alignAttr = this.group.alignAttr,
                 translateY,
@@ -30,7 +30,7 @@ $(function () {
         });
     })(Highcharts);;
 
-    Highcharts.setOptions({
+    Highcharts.setOptions({ //highcharts设置全局属性
         global : {
             useUTC : false
         },
@@ -44,7 +44,7 @@ $(function () {
         }
     });
 
-    $(".chooseDateType span").click(function(){
+    $(".chooseDateType span").click(function(){ //上一版程序中使用，目前暂时不用
         $hidden = $(this).parent().find('.none');
         $show = $(this).parent().find('.active');
         $hidden.removeClass('none').addClass('active');
@@ -55,7 +55,7 @@ $(function () {
         $('.'+$chooseDataType).removeClass("none");
     });
 
-    $(".search-box .dateshow").click(function(){
+    $(".search-box .dateshow").click(function(){ //点击日期展示区域后，显示选择日期的区域
         if ($(".search-box .datepeaker").hasClass("searchdate-none") || $(".search-box .datepeaker").hasClass("none")){
             $(".search-box .datepeaker").removeClass("searchdate-none");
             $(".search-box .datepeaker").slideDown("1000");
@@ -68,7 +68,7 @@ $(function () {
         }
     });
 
-    $(".search-box .datepeaker ul").on('click', 'li', function() {
+    $(".search-box .datepeaker ul").on('click', 'li', function() { //点击具体的时间段后，计算出对应的日期，并把日期填入日期展示区域
         var choosedval = $(this).attr('value');
         console.log(choosedval);
         var today = new Date(),
@@ -85,7 +85,7 @@ $(function () {
         dateDisplay(startDate, endDate);
     });
 
-    $(".search-box .datepeaker .confirm-button .confirm").click(function(){
+    $(".search-box .datepeaker .confirm-button .confirm").click(function(){  //点击确定按钮后，先做数据格式验证，然后把数据填入日期展示区域
         var startDate = $("#begindate").val(),
             endDate = $("#enddate").val();
         console.log(startDate + ' ' + endDate);
@@ -107,13 +107,13 @@ $(function () {
         $(".search-box .datepeaker .more-date input").val("");
     });
 
-    $(".search-box .datepeaker .confirm-button .cancel").click(function(){
+    $(".search-box .datepeaker .confirm-button .cancel").click(function(){ //点击取消按钮，清空文本框的内容
         $(".search-box .datepeaker .more-date input").val("");
         $(".search-box .datepeaker").addClass("searchdate-none");
         $(".search-box .datepeaker").slideUp("1000");
     });
 
-    $(".search-box .datepeaker .more-date input").focus(function(){
+    $(".search-box .datepeaker .more-date input").focus(function(){ //当鼠标点击后，隐藏错误提示文字
         $("div.datepeaker .errorinfo .startdateerrormsg").hide();
         $("div.datepeaker .errorinfo .enddateerrormsg").hide();
     });
@@ -121,7 +121,7 @@ $(function () {
     initDateWhenPageLoad();
 })
 
-function getDate (date) {
+function getDate (date) { //获取日期，date为一个数组，传出参数
     console.log("search button click.");
     var activetab = $(".chooseDateType .active").attr("for");
     console.log(activetab);
@@ -137,7 +137,7 @@ function getDate (date) {
     }
 }
 
-function strToDate (strDate, date) {
+function strToDate (strDate, date) { //将字符串翻译为具体的日期
     var today = new Date(),
         startDate,
         endDate;
@@ -192,7 +192,7 @@ function strToDate (strDate, date) {
     date["endDate"] = endDate;
 }
 
-function formatMonthAndDay(value){
+function formatMonthAndDay(value){ //将 ‘2016-2-1’ 替换为 ‘2016-02-01’
     if (value < 10) {
         return '0' + value;
     } else {
@@ -200,12 +200,12 @@ function formatMonthAndDay(value){
     }
 }
 
-function formatDate(date){
+function formatDate(date){ //将 时间戳 转化成 ‘2016-02-01’ 类型的字符串
     return date.getFullYear() + '-' + formatMonthAndDay(date.getMonth() + 1) + '-' + formatMonthAndDay(date.getDate());
 }
 
 var date = {};
-function search (data_kind) {
+function search (data_kind) { //向服务器发送post请求
     console.log(data_kind);
     getDate(date);
     console.log(date["startDate"]);
@@ -217,12 +217,12 @@ function search (data_kind) {
     })
 }
 
-function dateDisplay(startDate, endDate) {
+function dateDisplay(startDate, endDate) {  //将时间显示在 时间展示区域
     $(".display-startdate").html(startDate);
     $(".display-enddate").html(endDate);
 }
 
-function initDateWhenPageLoad() {
+function initDateWhenPageLoad() {  //当页面加载完毕后，将当日的日期显示在时间展示区域
     var date = {};
     strToDate('today', date);
     dateDisplay(date['startDate'], date['endDate']);
