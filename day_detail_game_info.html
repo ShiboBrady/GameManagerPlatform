@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Summary Data</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+
+<body onload="InitNavWhenPageLoad('day_detail_game_info.html')">
+    <div id="wraper">
+        <div class="nav_box">
+            <nav class="nav-content"></nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
+        <div class="search-box">
+        </div>
+        <div class="box">
+            <div class="chart_title"><span>查询结果</span></div>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var columnsData = [
+        { 'title': '日期' },
+        { 'title': '游戏类型' },
+        { 'title': '用户ID' },
+        { 'title': '游戏时长' },
+        { 'title': '金币变化' },
+    ];
+    $(function () {
+        var contentBox = '.search-box';
+        AddRangeDataChooseBox(contentBox);
+        // AddChannelBox(contentBox);
+        AddSearchButtonBox(contentBox, 'game_channel_user_info');
+        InitDatatables('#search_result_table', columnsData, true);
+    })
+
+    function callbacksuccess (data) {
+        console.log(data);
+        if (data.length == 0) {
+            SuccessMsg("暂时没有数据呦~");
+            return false;
+        }
+        for (var index in data) {
+            if (data[index].length != 5) {
+                console.log("Data error.");
+                ErrorMsg("Data error.");
+                return false;
+            } else {
+                var time = data[index][0];
+                var re = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})\.000Z$/
+                var arr = re.exec(time);
+                if (arr == null) {
+                    continue;
+                }
+                data[index][0] = arr[1] + " " + arr[2];
+            }
+        }
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(data).draw();
+    }
+    </script>
+</body>
+
+</html>

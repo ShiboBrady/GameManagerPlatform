@@ -1,229 +1,74 @@
-input[type='radio']:checked + span { background: red; font-size: 20px; }
-input[type='radio']:checked + span:before { background: red; font-size: 20px; }
 html { width: 98%; margin: 0 auto; padding: 0; }
-body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
-
-#wraper { width: 95%; margin: 0 auto 50px auto; }
-.nav_box {width: 100%; height: 30px; margin-bottom: 20px;}
-.box { width: 100%; border-radius: 5px; margin: 20px 0; background-color: #eff9fd; /*background-image: -webkit-linear-gradient(top, #fafafa, #e1e1e1); background-image: -moz-linear-gradient(top, #fafafa, #e1e1e1); background-image: -o-linear-gradient(top, #fafafa, #e1e1e1); background-image: linear-gradient(to bottom, #fafafa, #e1e1e1);*/ -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); border: 1px solid #c0c0c8; }
-.search_box { color: #555860; height: 40px; height: 100px; overflow: hidden; background: none;}
-.search-box { color: #555860; height: 40px; background: none;}
-.chart_box {}
-.table_box {}
-
-.box .chart_title {width: 100%; height: 40px; margin-bottom: 10px;}
-.box .chart_title span {display: inline-block; font-size: 25px; margin-left: 2em; line-height: 40px; color: #09579a}
+body { background: #fff; font: 13px/20px "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif; }
+/*total layout*/
+#wraper { width: 95%; margin: 0 auto 50px auto; } /*hole content*/
+.nav_box { width: 100%; height: 30px; margin-bottom: 20px; } /*nav*/
+.search-box { width: 100%; color: #555860; height: 40px; background: none;} /*search*/
+.box { width: 100%; border-radius: 5px; margin: 20px 0; background-color: #eff9fd; -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1); border: 1px solid #c0c0c8; }
+.none { display: none; }
+/*nav box*/
 .nav_box nav { width: auto; height: 30px; float: left; line-height: 30px; font-size: 18px; }
-.nav_box .refresh_button {display: block; text-decoration:none; float: left; margin-left: 30px; width: 30px; height: 30px; border-radius: 8px; background: url("../images/scan_icon.png") no-repeat;}
-.nav_box a:hover { background-color: #FFEBCD;}
+.nav_box .refresh_button { display: block; text-decoration: none; float: left; margin-left: 30px; width: 30px; height: 30px; border-radius: 8px; background: url("../images/scan_icon.png") no-repeat; }
+.nav_box a:hover { background-color: #FFEBCD; }
+
+.search-item { display: inline-block; position: relative; width: auto; height: 40px;  margin-right: 20px;}
+.search-item > .search-item-content { position: absolute; bottom: 0px; }
+
+/*day range input box*/
+div.choose-date {width: 300px; height: 38px; z-index: 100;  font: 16px/20px "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif; }
+div.dateshow { position: relative; width: 300px; height: 38px; border-radius: 5px; border: 1px solid black; }
+div.datepeaker { position: absolute; top: 39px; width: 300px; height: 130px; border-radius: 5px; border: 1px solid black; padding: 0; clear: both; background: #fff; }
+div.dateshow .date { float: left; width: 250px; height: 100%; border-right: 1px solid black; line-height: 40px; background: url(../images/calendar.jpg) no-repeat 0 center; background-size: 25px 25px; }
+div.dateshow .date .date_display { margin-left: 40px; }
+div.dateshow .arrow_box { height: 100%; position: absolute; left: 251px; right: 0px; top: 0px; }
+div.dateshow .arrow_box .arrow { position: absolute; width: 0; height: 0; top: 18px; left: 15px; border: 8px solid transparent; border-top: 8px solid black; }
+div.datepeaker .easy { position: relative; width: 100%; height: 35px; background: #c0d4eb; margin: 0; border: 0; border-radius: 5px 5px 0 0; }
+div.datepeaker .easy ul { position: absolute; left: 0px; top: 0px; bottom: 0px; margin: 0 0 0 20px; padding: 8px 0; list-style: none; line-height: 23px; }
+div.datepeaker .easy ul li { display: inline-block; border-right: 1px solid black; height: 100%; padding: 0 5px 5px 3px; }
+div.datepeaker .easy ul li:last-child { border-right: 0; }
+div.datepeaker .easy ul li:hover, div.dateshow:hover { cursor: pointer; }
+div.datepeaker .errorinfo { position: relative; width: 100%; height: 20px; }
+div.datepeaker .errorinfo span { display: inline-block; font-size: 12px; color: red; }
+div.datepeaker .errorinfo .startdateerrormsg { position: absolute; left: 40px; width: 100px; display: none; }
+div.datepeaker .errorinfo .enddateerrormsg { position: absolute; left: 160px; width: 100px; display: none; }
+div.datepeaker .more-date { position: relative; width: 100%; height: 40px; }
+div.datepeaker .more-date input[type="text"] { width: 100px; border: 1px solid; border-radius: 3px; border-color: #a8acbc; box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc; }
+div.datepeaker .confirm-button { position: relative; width: 50%; height: 40px; margin: 0 auto; }
+div.datepeaker .confirm-button input[type="button"] { font-size: 17px; color: white; text-align: center; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); border: 0; border-radius: 3px; cursor: pointer; margin-right: 10px; }
+div.datepeaker .confirm-button input[type="button"].confirm { background: #5ca934; border-bottom: 2px solid #009999; -webkit-box-shadow: inset 0 -1px #009999; box-shadow: inset 0 -1px #009999; }
+div.datepeaker .confirm-button input[type="button"].cancel { background: #f0776c; border-bottom: 2px solid #d76b60; -webkit-box-shadow: inset 0 -1px #d76b60; box-shadow: inset 0 -1px #d76b60; }
+div.datepeaker .confirm-button input[type="button"]:active { outline: none; -webkit-box-shadow: none; box-shadow: none; border-color: transparent; }
+
+/*search one day input*/
+div.choose-data-oneday {min-width: 200px;}
+div.choose-data-oneday input { background: url(../images/calendar.jpg) no-repeat 0 center; background-size: 28px 23px; padding-left: 50px; width: 150px; height: 35px; font-size: 20px; }
+
+/*choose room type dropdown list*/
+.choose-room {min-width: 100px;}
+.choose-room select { width: 100px; height: 30px; font-weight: bold;}
+.choose-room select option { height: 30px; }
+
+/*channel input*/
+.choose-channelId {width: 80px;}
+.choose-channelId input { width: 80px; height: 25px; font-size: 15px; border-radius: 3px; border: 1px solid black;}
+
+/*gamepoint*/
+.choose-point {width: 200px;}
+.choose-point input { width: 80px; height: 25px; font-size: 15px; border-radius: 3px;  border: 1px solid black;}
+
+/*search button*/
+.search-button {min-width: 150px;}
+.search-button .errormsg {color: red; vertical-align: center; }
+
+/*search result box*/
+.box .chart_title { width: 100%; height: 40px; margin-bottom: 10px; }
+.box .chart_title span { display: inline-block; font-size: 25px; margin-left: 2em; line-height: 40px; color: #09579a }
 
 /*button*/
-.button { position: relative; display: inline-block; height: 28px; line-height: 28px; padding: 0 20px; font-size: 13px; color: white; text-align: center; text-decoration: none; text-shadow: 0 -1px rgba(0, 0, 0, 0.4); background-clip: padding-box; border: 1px solid; border-radius: 2px; cursor: pointer; -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); }
+.button { position: relative; display: inline-block; vertical-align: top; height: 28px; line-height: 25px; padding: 0 10px; font-size: 15px; color: white; text-align: center; text-decoration: none; text-shadow: 0 -1px rgba(0, 0, 0, 0.4); background-clip: padding-box; border: 1px solid; border-radius: 2px; cursor: pointer; -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.25); }
 .button:before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; right: 0; pointer-events: none; background-image: -webkit-radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: -moz-radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: -o-radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); background-image: radial-gradient(center top, farthest-corner, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)); }
 .button:hover:before { background-image: -webkit-radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); background-image: -moz-radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); background-image: -o-radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); background-image: radial-gradient(farthest-corner, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)); }
 .button:active { -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2); box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2); }
 .button:active:before { content: none; }
 .button-blue { background: #1097e6; border-color: #0d78b6 #0d78b6 #0b689e; background-image: -webkit-linear-gradient(top, #25a5f0, #1097e6 66%, #0f8ad3); background-image: -moz-linear-gradient(top, #25a5f0, #1097e6 66%, #0f8ad3); background-image: -o-linear-gradient(top, #25a5f0, #1097e6 66%, #0f8ad3); background-image: linear-gradient(to bottom, #25a5f0, #1097e6 66%, #0f8ad3); }
 .button-blue:active { background: #1097e6; border-color: #0b689e #0d78b6 #0d78b6; }
-.button-red { background: #d5452f; border-color: #ae3623 #ae3623 #992f1f; background-image: -webkit-linear-gradient(top, #da5c48, #d5452f 66%, #c73d28); background-image: -moz-linear-gradient(top, #da5c48, #d5452f 66%, #c73d28); background-image: -o-linear-gradient(top, #da5c48, #d5452f 66%, #c73d28); background-image: linear-gradient(to bottom, #da5c48, #d5452f 66%, #c73d28); }
-.button-red:active { background: #d5452f; border-color: #992f1f #ae3623 #ae3623; }
-
-/*input*/
-.choosedata .input { height: 26px; width: 120px; padding: 0 12px 0 15px; border: 1px solid; border-color: #a8acbc #babdcc #c0c3d2; border-radius: 5px; -webkit-appearance: textfield; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -webkit-box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc; box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc; }
-.choosedata .input:focus { outline: 0; border-color: #66b1ee; -webkit-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9); box-shadow: 0 0 2px rgba(85, 168, 236, 0.9); }
-
-/*dropdown*/
-.dropdown { display: inline-block; position: relative; overflow: hidden; height: 28px; width: 150px; background: #f2f2f2; border: 1px solid; border-color: white #f7f7f7 #f5f5f5; border-radius: 5px; background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06)); background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06)); background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06)); background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06)); -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08); }
-.dropdown:before, .dropdown:after { content: ''; position: absolute; z-index: 2; top: 9px; right: 10px; width: 0; height: 0; border: 4px dashed; border-color: #888 transparent; pointer-events: none; }
-.dropdown:before { border-bottom-style: solid; border-top: none; }
-.dropdown:after { margin-top: 7px; border-top-style: solid; border-bottom: none; }
-.dropdown-select { position: relative; width: 130%; margin: 0; padding: 6px 8px 6px 10px; height: 28px; line-height: 14px; color: #62717a; text-shadow: 0 1px white; background: #f2f2f2; background: rgba(0, 0, 0, 0) !important; border: 0; border-radius: 0; -webkit-appearance: none; }
-.dropdown-select:focus { z-index: 3; width: 100%; color: #394349; outline: 2px solid #49aff2; outline: 2px solid -webkit-focus-ring-color; outline-offset: -2px; }
-.dropdown-select > option { margin: 3px; padding: 6px 8px; text-shadow: none; background: #f2f2f2; border-radius: 3px; cursor: pointer; }
-
-
-/*search box*/
-.choosedata_wraper { width: 900px; height: 100%; margin: 0 auto; }
-.chooseDateType { padding-top: 37px; float: left; width: auto; height: 100%; margin:0 10px; }
-.choosedata { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px;}
-.chooseVersion { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px;}
-.search { float: left; width: auto; height: 100%; padding-top: 33px; margin:0 10px; }
-
-.choose-version { float: left; width: auto; height: 100%; /*margin: 10px 0 0 10px;*/}
-.choose-version label {display: block;}
-.search-button { float: left; width: auto; height: 100%; margin:10px 0 0 10px; }
-
-.chooseDateType span { cursor: pointer; text-decoration: underline; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }
-.chooseDateType span:hover { color:black;  }
-.none { display: none; }
-
-
-div.choose-date {
-    font: 16px/20px "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;
-    float: left; width: auto; height: 40px;
-    position: relative;z-index: 1000;
-}
-div.dateshow {
-    position: relative;
-    width: 300px;
-    height: 40px;
-    border-radius: 5px;
-    border:1px solid black;
-}
-
-div.datepeaker {
-    position: absolute;
-    top: 41px;
-    width: 300px;
-    height: 130px;
-    border-radius: 5px;
-    border:1px solid black;
-    padding: 0;
-    clear: both;
-    background: #fff;
-}
-
-div.dateshow .date{
-    float: left;
-    width: 250px;
-    height: 100%;
-    border-right: 1px solid black;
-    line-height: 40px;
-    background: url(../images/calendar.jpg) no-repeat 0 center;
-    background-size: 25px 25px;
-}
-
-div.dateshow .date .date_display {
-    margin-left: 40px;
-}
-
-div.dateshow .arrow_box {
-    height: 100%;
-    position: absolute;
-    left: 251px;
-    right: 0px;
-    top: 0px;
-}
-
-div.dateshow .arrow_box .arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: 18px;
-    left: 15px;
-    border: 8px solid transparent;
-    border-top: 8px solid black;
-}
-
-div.datepeaker .easy {
-    position: relative;
-    width: 100%;
-    height: 35px;
-    background: #c0d4eb;
-    margin: 0;
-    border:0;
-    border-radius: 5px 5px 0 0;
-}
-
-div.datepeaker .easy ul {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    bottom: 0px;
-    margin: 0 0 0 20px;
-    padding: 8px 0;
-    list-style: none;
-    line-height: 23px;
-}
-
-div.datepeaker .easy ul li {
-    display: inline-block;
-    border-right: 1px solid black;
-    height: 100%;
-    padding: 0 5px 5px 0;
-}
-
-div.datepeaker .easy ul li:last-child {
-    border-right: 0;
-}
-
-div.datepeaker .easy ul li:hover, div.dateshow:hover {
-    cursor: pointer;
-}
-
-div.datepeaker .errorinfo{
-    position: relative;
-    width: 100%;
-    height: 20px;
-}
-
-div.datepeaker .errorinfo span {
-    display: inline-block;
-    font-size: 12px;
-    color: red;
-}
-
-div.datepeaker .errorinfo .startdateerrormsg {
-    position: absolute;
-    left: 40px;
-    width: 100px;
-    display: none;
-}
-
-div.datepeaker .errorinfo .enddateerrormsg {
-    position: absolute;
-    left: 160px;
-    width: 100px;
-    display: none;
-}
-
-div.datepeaker .more-date {
-    position: relative;
-    width: 100%;
-    height: 40px;
-}
-
-div.datepeaker .more-date input[type="text"] {
-    width: 100px;
-    border: 1px solid;
-    border-radius: 3px;
-    border-color: #a8acbc;
-    box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc;
-}
-
-div.datepeaker .confirm-button {
-    position: relative;
-    width: 50%;
-    height: 40px;
-    margin: 0 auto;
-}
-
-div.datepeaker .confirm-button input[type="button"] {
-    font-size: 17px;
-    color: white;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-div.datepeaker .confirm-button input[type="button"].confirm {
-    background: #5ca934;
-    border-bottom: 2px solid #009999;
-    -webkit-box-shadow: inset 0 -1px #009999;
-    box-shadow: inset 0 -1px #009999;
-}
-div.datepeaker .confirm-button input[type="button"].cancel {
-    background: #f0776c;
-    border-bottom: 2px solid #d76b60;
-    -webkit-box-shadow: inset 0 -1px #d76b60;
-    box-shadow: inset 0 -1px #d76b60;
-}
-div.datepeaker .confirm-button input[type="button"]:active {
-    outline: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-color: transparent;
-}

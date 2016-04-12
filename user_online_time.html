@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Online Time Page</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
+    <!-- <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script> -->
+    <!-- <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script> -->
+    <!-- <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/export-csv.js"></script> -->
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+<body onload="InitNavWhenPageLoad('user_online_time.html')">
+    <div id="wraper">
+        <div class="nav_box">
+            <nav class="nav-content"></nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
+        <div class="search-box">
+        </div>
+        <div class="box">
+            <div class="chart_title"><span>查询结果</span></div>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+        </div>
+        <!-- <div class="box chart_box">
+            <div class="chart_title"><span>图形展示</span></div>
+            <div id="container1"></div>
+        </div> -->
+    </div>
+    <script type="text/javascript">
+    var x_arr = ['注册用户', '游客', '机器人'];
+    var columnsData = [
+        { 'title': '游戏类型' },
+        { 'title': '注册用户' },
+        { 'title': '游客' },
+        { 'title': '机器人' },
+    ];
+    $(function () {
+        var contentBox = '.search-box';
+        AddChooseOneDayBox(contentBox);
+        AddSearchButtonBox(contentBox, 'user_play_game_times');
+        InitDatatables('#search_result_table', columnsData, true);
+        // InitHighCharts();
+        // var chart1 = new Highcharts.Chart({
+        //     chart: {
+        //         style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
+        //         renderTo: 'container1',
+        //         type:'column',
+        //         marginRight: 10,
+        //     },
+        //     title: {text:'用户在线时长柱状图'},
+        //     xAxis: {
+        //         title: {
+        //             text:'玩家种类'
+        //         }, 
+        //         type: 'datetime',
+        //         categories: x_arr,
+        //         max:2,
+        //         min:0,
+        //         // tickPixelInterval:50
+        //     },
+        //     yAxis: {
+        //         title:{
+        //             text:'时长'
+        //         }
+        //     },
+        //     scrollbar: {
+        //            enabled: true,
+        //     },
+        //     series: [
+        //         {
+        //             name:'游戏场',
+        //         },{
+        //             name:'比赛场',
+        //         }
+        //     ],
+        //     legend: {
+        //         enabled: false,
+        //         symbolPadding: 20,
+        //         // symbolWidth: 0
+        //     },
+        //     plotOptions: {
+        //         series: {
+        //             marker: {
+        //                 enabled: false, //表示是否有数据点
+        //             },
+        //             pointPadding: 20,
+        //             pointWidth:15,
+        //             showCheckbox:true, //表示是否要显示复选框，该选项与series：中的selected配合使用。
+        //             events :{
+        //                 checkboxClick: function(event) { //表示复选框的选择与取消都可以显示和隐藏所表示的数据。
+        //                     if(event.checked==true) {
+        //                         this.show();
+        //                     }
+        //                     else {
+        //                         this.hide();
+        //                     }
+        //                 },
+        //             },
+        //         },
+        //     },
+        //     credits: {enabled:false},
+        // });
+        // chart1.reflow();
+    })
+
+    function callbacksuccess (data) {
+        // data = [[23, 45, 55], [34, 33, 57]];
+        if (data.length == 0) {
+            SuccessMsg("暂时没有数据呦~");
+            return false;
+        }
+        if (data.length != 2) {
+            console.log("Data error.");
+            ErrorMsg("Data error.");
+            return false;
+        }
+        for (var index in data) {
+            if (data[index].length != 3) {
+                console.log("Data error.");
+                ErrorMsg("Data error.");
+                return false;
+            } else {
+                for (var dataIndex in data[index]) {
+                    data[index][dataIndex] = parseInt(data[index][dataIndex] / 3600 + 0.5) + 'h';
+                }
+            }
+        }
+        // var chart_total = $('#container1').highcharts();
+        // // chart_total.xAxis[0].setCategories(xData);
+        // for (var index in data) {
+        //     chart_total.series[index].setData(data[index]);
+        // }
+        // chart_total.reflow();
+
+        var firstColumnsName = ['游戏场', '比赛场'];
+        for (var index in data) {
+            data[index].splice(0, 0, firstColumnsName[index]);
+        }
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(data).draw();
+    }
+    </script>
+</body>
+</html>

@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <title>left menu datacount page</title>
     <link rel="stylesheet" type="text/css" href="public/css/left_menu.css">
-    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-easyui-v1.4.4/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="public/javascript/leftmenu.js"></script>
     <style type="text/css">
     body {font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
     </style>
+    <script type="text/javascript">
+        
+    </script>
 </head>
-<body>
+<body onload=load('left_menu_datacount.html')>
     <aside>
-        <!-- <section id="leftmenu_container">
-            <ul class="pagination">
-                <li for="accordion_ddz" class="active">斗地主</li>
-                <li for="accordion_dz">德州</li>
-                <li for="accordion_xq">象棋</li>
-            </ul>
-        </section> -->
-        <div class="accordion">
-            <div class="accordion_ddz">
+        <!-- <div class="accordion-third">
+            <div class="accordion-twice">
+                <input type="radio" name="ddz" id="1">
+                <label for="1"><span>斗地主</span><i class="icon"></i></label>
                 <div class="section">
                     <input type="radio" name="accordion-1" id="section-1"/>
                     <label for="section-1"><span>实时数据</span></label>
@@ -50,6 +49,7 @@
                     <div class="content">
                         <ul>
                             <li><a _href="coin_count.html" page_title="金币总计" href="javascript:void(0);" target="iframe_content">金币总计</a></li>
+                            <li><a _href="coin_bankruptcy_count.html" page_title="破产金统计" href="javascript:void(0);" target="iframe_content">破产金统计</a></li>
                             <li><a _href="coin_day_add.html" page_title="每日新增金币" href="javascript:void(0);" target="iframe_content">每日新增金币</a></li>
                             <li><a _href="coin_day_consume.html" page_title="每日消耗金币" href="javascript:void(0);" target="iframe_content">每日消耗金币</a></li>
                             <li><a _href="coin_left_rank.html" page_title="金币剩余排行" href="javascript:void(0);" target="iframe_content">金币剩余排行</a></li>
@@ -66,7 +66,8 @@
                     <div class="content">
                         <ul>
                             <li><a _href="charge_data_count.html" page_title="充值数据汇总" href="javascript:void(0);" target="iframe_content">充值数据汇总</a></li>
-                            <li><a _href="channel_count.html" page_title="渠道统计" href="javascript:void(0);" target="iframe_content">渠道统计</a></li>
+                            <li><a _href="charge_new_user_count.html" page_title="新增用户数据" href="javascript:void(0);" target="iframe_content">新增用户数据</a></li>
+                            <li><a _href="channel_count.html" page_title="渠道统计" href="javascript:void(0);" target="iframe_content">渠道统计</a></li> 
                             <li><a _href="channel_details_count.html" page_title="详细渠道统计" href="javascript:void(0);" target="iframe_content">详细渠道统计</a></li>
                             <li><a _href="goods_sales_details.html" page_title="商品销售统计详情" href="javascript:void(0);" target="iframe_content">商品销售统计详情</a></li>
                             <li><a _href="goods_purchase_details.html" page_title="商品购买统计详情" href="javascript:void(0);" target="iframe_content">商品购买统计详情</a></li>
@@ -74,12 +75,22 @@
                             <li><a _href="charge_day_rank.html" page_title="充值排行(日)" href="javascript:void(0);" target="iframe_content">充值排行(日)</a></li>
                             <li><a _href="charge_week_rank.html" page_title="充值排行(周)" href="javascript:void(0);" target="iframe_content">充值排行(周)</a></li>
                             <li><a _href="charge_month_rank.html" page_title="充值排行(月)" href="javascript:void(0);" target="iframe_content">充值排行(月)</a></li>
-                            <li><a _href="charge_rank.html" page_title="充值排行" href="javascript:void(0);" target="iframe_content">充值排行</a></li>
+                            <li><a _href="charge_rank.html" page_title="充值排行" href="javascript:void(0);" target="iframe_content">充值排行</a></li> 
                         </ul>
                     </div>
                 </div>
                 <div class="section">
                     <input type="radio" name="accordion-1" id="section-5"/>
+                    <label for="section-5"><span>游戏数据</span></label>
+                    <div class="content">
+                        <ul>
+                            <li><a _href="game_info.html" page_title="游戏场信息" href="javascript:void(0);" target="iframe_content">游戏场信息</a></li>
+                            <li><a _href="match_info.html" page_title="比赛场信息" href="javascript:void(0);" target="iframe_content">比赛场信息</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="section">
+                    <input type="radio" name="accordion-1" id="section-6"/>
                     <label for="section-5"><span>存留数据</span></label>
                     <div class="content">
                         <ul>
@@ -88,22 +99,42 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 德州 -->
-            <div class="accordion_dz none">
+            <div class="accordion-twice">
+                <input type="radio" name="ddz" id="2">
+                <label for="2"><span>德州</span><i class="icon"></i></label>
                 <div class="section">
-                    <input type="radio" name="accordion-2" id="dz_section-1"/>
-                    <label for="dz_section-1"><span>实时数据</span></label>
+                    <input type="radio" name="accordion-2" id="section-11"/>
+                    <label for="section-11"><span>实时数据</span></label>
+                </div>
+                <div class="section">
+                    <input type="radio" name="accordion-2" id="section-21"/>
+                    <label for="section-21"><span>汇总数据</span></label>
+                </div>
+                <div class="section">
+                    <input type="radio" name="accordion-2" id="section-31"/>
+                    <label for="section-31"><span>金币数据</span></label>
+                </div>
+                <div class="section">
+                    <input type="radio" name="accordion-2" id="section-41"/>
+                    <label for="section-41"><span>充值数据</span></label>
                     <div class="content">
                         <ul>
-                            <li><i class="fa fa-inbox"></i><a href="welcome.html" target="iframe_content">实时在线</a></li>
-                            <li><i class="fa fa-share"></i><span>实时充值</span></li>
-                            <li><i class="fa fa-archive"></i><span>实时渠道统计</span></li>
+                            <li><a _href="charge_data_count.html" page_title="充值数据汇总" href="javascript:void(0);" target="iframe_content">充值数据汇总</a></li>
+                            <li><a _href="charge_new_user_count.html" page_title="新增用户数据" href="javascript:void(0);" target="iframe_content">新增用户数据</a></li>
+                            <li><a _href="channel_count.html" page_title="渠道统计" href="javascript:void(0);" target="iframe_content">渠道统计</a></li> 
+                            <li><a _href="channel_details_count.html" page_title="详细渠道统计" href="javascript:void(0);" target="iframe_content">详细渠道统计</a></li>
+                            <li><a _href="goods_sales_details.html" page_title="商品销售统计详情" href="javascript:void(0);" target="iframe_content">商品销售统计详情</a></li>
+                            <li><a _href="goods_purchase_details.html" page_title="商品购买统计详情" href="javascript:void(0);" target="iframe_content">商品购买统计详情</a></li>
+                            <li><a _href="charge_channel_count.html" page_title="充值渠道统计" href="javascript:void(0);" target="iframe_content">充值渠道统计</a></li>
+                            <li><a _href="charge_day_rank.html" page_title="充值排行(日)" href="javascript:void(0);" target="iframe_content">充值排行(日)</a></li>
+                            <li><a _href="charge_week_rank.html" page_title="充值排行(周)" href="javascript:void(0);" target="iframe_content">充值排行(周)</a></li>
+                            <li><a _href="charge_month_rank.html" page_title="充值排行(月)" href="javascript:void(0);" target="iframe_content">充值排行(月)</a></li>
+                            <li><a _href="charge_rank.html" page_title="充值排行" href="javascript:void(0);" target="iframe_content">充值排行</a></li> 
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </aside>
 </body>
 </html>

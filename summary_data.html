@@ -10,203 +10,137 @@
     <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
     <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script>
     <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
     <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
     <script type="text/javascript" src="public/javascript/content_common.js"></script>
     <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
 </head>
 
-<body>
+<body onload="InitNavWhenPageLoad('summary_data.html')">
     <div id="wraper">
         <div class="nav_box">
-            <nav>
-                <span>当前位置：</span>
-                <span>数据统计</span>
-                <span>&gt;</span>
-                <span>斗地主</span>
-                <span>&gt;</span>
-                <span>汇总数据</span>
-                <span>&gt;</span>
-                <span>总计数据</span>
-            </nav>
+            <nav class="nav-content"></nav>
             <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
         </div>
         <div class="search-box">
-            <div class="choose-date">
-                <div class="dateshow">
-                    <div class="date">
-                        <div class="date_display">
-                            <span class="display-startdate"></span>
-                            <span>~</span>
-                            <span class="display-enddate"></span>
-                        </div>
-                    </div>
-                    <div class="arrow_box"><div class="arrow"></div></div>
-                </div>
-                <div class="datepeaker none">
-                    <div class="easy">
-                        <ul>
-                            <li value="yesterday">昨天</li>
-                            <li value="thisweek">本周</li>
-                            <li value="lastweek">上周</li>
-                            <li value="lastthiryday">最近30天</li>
-                            <li value="lastmonth">上月</li>
-                        </ul>
-                    </div>
-                    <div class="errorinfo">
-                        <span class="startdateerrormsg">日期格式不正确</span>
-                        <span class="enddateerrormsg">日期格式不正确</span>
-                    </div>
-                    <div class="more-date">
-                        <label>自定</label>
-                        <input type="text" id="begindate" onfocus="WdatePicker();">
-                        <label>到</label>
-                        <input type="text" id="enddate" onfocus="WdatePicker();">
-                    </div>
-                    <div class="confirm-button">
-                        <input class="confirm" type="button" value="确定">
-                        <input class="cancel" type="button" value="取消">
-                    </div>
-                </div>
-            </div>
-            <div class="search-button">
-                <input type="button" class="button button-blue" value="查询" onclick="search('summary_data');" />
-            </div>
         </div>
         <div class="box">
             <div class="chart_title"><span>查询结果</span></div>
             <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
         </div>
-        <div class="box chart_box">
+        <!-- <div class="box chart_box">
             <div class="chart_title"><span>图形展示</span></div>
             <div id="container1"></div>
-        </div>
+        </div> -->
     </div>
     <script type="text/javascript">
+    var columnsData = [
+        { 'title': '日期' },
+        { 'title': '日活跃用户' },
+        { 'title': '用户登录次数' },
+    ];
     $(function () {
-        $('#search_result_table').DataTable({
-            "data":[],
-            "columns": [
-                    { 'title': '序号' },
-                    { 'title': '日期' },
-                    { 'title': '今日新增用户数' },
-                    { 'title': '新增用户占比' },
-                    { 'title': 'ccu' },
-                    { 'title': 'mcu' },
-                    { 'title': 'dau' },
-                    { 'title': 'mau' },
-                    { 'title': '今日充值人数' },
-                    { 'title': '今日充值总金额' },
-                    { 'title': 'arpu' },
-                    { 'title': 'arppu' },
-                    { 'title': '回归用户数' },
-                    { 'title': '未进行游戏的人数' },
-                    { 'title': '流失率' },
-                    { 'title': '玩游戏人数' },
-                    { 'title': '转化率' },
-                    { 'title': '开局总数' },
-                    { 'title': '平均游戏时长(局)' },
-                    { 'title': '平均游戏时长(总)' },
-                    { 'title': '最高在线' },
-                    { 'title': '玩1小时以上总用户数' },
-                ],
-            "paging": true,
-            "searching": false,
-            "select": false,
-            "scrollX": true,
-            "language": {
-                "lengthMenu": "每页 _MENU_ 条记录",
-                "zeroRecords": "没有找到记录",
-                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-                "infoEmpty": "无记录",
-                "infoFiltered": "(从 _MAX_ 条记录过滤)"
-            },
-        });
-        $('#search_result_table').colResizable();
+        var contentBox = '.search-box';
+        AddRangeDataChooseBox(contentBox);
+        AddSearchButtonBox(contentBox, 'user_login_times');
+        InitDatatables('#search_result_table', columnsData, true);
+        // var chart1 = new Highcharts.Chart({
+        //     chart: {
+        //         style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
+        //         renderTo: 'container1',
+        //         type:'spline',
+        //         marginRight: 10,
+        //     },
+        //     title: {text:'总用户数量统计曲线图'},
+        //     xAxis: {
+        //         type: 'category', 
+        //         title: {text:'时间'}, 
+        //         tickPixelInterval: 150,
+        //         min: 0,
+        //         max: 10,
+        //     },
+        //     yAxis: {
+        //         title:{
+        //             text:'在线人数'
+        //         }
+        //     },
+        //     scrollbar: {
 
-        var chart1 = new Highcharts.Chart({
-            chart: {
-                style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
-                renderTo: 'container1',
-                type:'spline',
-                marginRight: 10,
-            },
-            title: {text:'总用户数量统计曲线图'},
-            xAxis: {
-                type: 'category', 
-                title: {text:'时间'}, 
-                tickPixelInterval: 150,
-                min: 0,
-                max: 10,
-            },
-            yAxis: {
-                title:{
-                    text:'在线人数'
-                }
-            },
-            scrollbar: {
+        //            enabled: true
 
-                   enabled: true
-
-            },
-            series: [
-                {
-                    name:'ccu', 
-                    selected: true,
-                },
-                {
-                    name:'dau',
-                    selected: true, 
-                },
-            ],
-            legend: {
-                enabled: true,
-                symbolPadding: 20,
-                // symbolWidth: 0
-            },
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false, //表示是否有数据点
-                    },
-                    showCheckbox:true, //表示是否要显示复选框，该选项与series：中的selected配合使用。
-                    events :{
-                        checkboxClick: function(event) { //表示复选框的选择与取消都可以显示和隐藏所表示的数据。
-                            if(event.checked==true) {
-                                this.show();
-                            }
-                            else {
-                                this.hide();
-                            }
-                        },
-                    },
-                },
-            },
-            credits: {enabled:false},
-        });
-        chart1.reflow();
-    })
+        //     },
+        //     series: [
+        //         // {
+        //         //     name:'ccu', 
+        //         //     selected: true,
+        //         // },
+        //         {
+        //             name:'dau',
+        //             selected: true, 
+        //         },
+        //     ],
+        //     legend: {
+        //         enabled: true,
+        //         symbolPadding: 20,
+        //         // symbolWidth: 0
+        //     },
+        //     plotOptions: {
+        //         series: {
+        //             marker: {
+        //                 enabled: false, //表示是否有数据点
+        //             },
+        //             showCheckbox:true, //表示是否要显示复选框，该选项与series：中的selected配合使用。
+        //             events :{
+        //                 checkboxClick: function(event) { //表示复选框的选择与取消都可以显示和隐藏所表示的数据。
+        //                     if(event.checked==true) {
+        //                         this.show();
+        //                     }
+        //                     else {
+        //                         this.hide();
+        //                     }
+        //                 },
+        //             },
+        //         },
+        //     },
+        //     credits: {enabled:false},
+        // });
+        // chart1.reflow();
+    });
 
     function callbacksuccess (data) {
-        console.log(data);
+        if (data.length == 0) {
+            SuccessMsg("暂时没有数据呦~");
+            return false;
+        }
+        for (var index in data) {
+            if (data[index].length != 3) {
+                console.log("Data error.");
+                ErrorMsg("Data error.");
+                return false;
+            }
+        }
         var table = $("#search_result_table").DataTable();
         table.clear();
         table.rows.add(data).draw();
-        var xaxis = [];
-        var ccuChartData = [];
-        var dauChartData = [];
-        for (var index = 0; index < data.length; ++index) {
-            var dataFormat = Highcharts.dateFormat('%Y<br/>%m-%d', parseInt(data[index][1]));
-            xaxis.push(dataFormat);
-            ccuChartData.push(data[index][4]);
-            dauChartData.push(data[index][6]);
-        }
-        console.log(ccuChartData);
-        var chart_total = $('#container1').highcharts();
-        chart_total.series[0].setData(ccuChartData);
-        chart_total.series[1].setData(dauChartData);
-        chart_total.xAxis[0].setCategories(xaxis);
+        // var xaxis = [];
+        // var ccuChartData = [];
+        // var dauChartData = [];
+        // for (var index = 0; index < data.length; ++index) {
+        //     var dataFormat = Highcharts.dateFormat('%Y<br/>%m-%d', parseInt(data[index][1]));
+        //     xaxis.push(dataFormat);
+        //     ccuChartData.push(data[index][4]);
+        //     dauChartData.push(data[index][6]);
+        // }
+        // console.log(ccuChartData);
+        //var chart_total = $('#container1').highcharts();
+        // chart_total.series[0].setData(ccuChartData);
+        //chart_total.series[1].setData(dauChartData);
+        // chart_total.xAxis[0].setCategories(xaxis);
     }
     </script>
 </body>

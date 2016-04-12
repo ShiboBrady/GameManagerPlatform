@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Promoting Match Info</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+
+<body onload="InitNavWhenPageLoad('promoting_match_info.html')">
+    <div id="wraper">
+        <div class="nav_box">
+            <nav class="nav-content"></nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
+        <div class="search-box">
+        </div>
+        <div class="box">
+            <div class="chart_title"><span>查询结果</span></div>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var columnsData = [
+        { 'title': '日期' },
+        { 'title': '比赛开赛场次' }
+    ];
+    $(function () {
+        var contentBox = '.search-box';
+        AddRangeDataChooseBox(contentBox);
+        AddChannelBox(contentBox);
+        AddChooseBoxInitFromServer(contentBox, 'match');
+        AddSearchButtonBox(contentBox, 'channel_match_run_times');
+        InitDatatables('#search_result_table', columnsData, true);
+    });
+    function callbacksuccess (data) {
+        if (data.length == 0) {
+            SuccessMsg("暂时没有数据呦~");
+            return false;
+        }
+        for (var index in data) {
+            if (data[index].length != 2) {
+                console.log("Data error.");
+                ErrorMsg("Data error.");
+                return false;
+            }
+        }
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(data).draw();
+    }
+    </script>
+</body>
+
+</html>

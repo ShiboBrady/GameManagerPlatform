@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Coin Reduce Rank</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+
+<body onload="InitNavWhenPageLoad('day_active_user.html')">
+    <div id="wraper">
+        <div class="nav_box">
+            <nav class="nav-content"></nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
+        <div class="search-box">
+        </div>
+        <div class="box chart_box">
+            <div class="chart_title"><span>图形展示</span></div>
+            <div id="container1"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(function () {
+        var contentBox = '.search-box';
+        AddRangeDataChooseBox(contentBox);
+        AddSearchButtonBox(contentBox, 'coin_reduce_rank');
+        InitHighCharts();
+        var chart1 = new Highcharts.Chart({
+            chart: {
+                style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
+                renderTo: 'container1',
+                type:'column',
+                marginRight: 10,
+            },
+            title: {text:'日活跃用户'},
+            xAxis: {
+                type: 'category', 
+                title: {text:'时间'}, 
+                tickPixelInterval: 150,
+                min: 0,
+                max: 10,
+            },
+            yAxis: {
+                title:{
+                    text:'人数'
+                }
+            },
+            scrollbar: {
+
+                   enabled: true
+
+            },
+            series: [
+                {
+                    name:'活跃用户人数', 
+                    selected: true,
+                    data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                }
+            ],
+            legend: {
+                enabled: false,
+                symbolPadding: 20,
+                // symbolWidth: 0
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        enabled: false, //表示是否有数据点
+                    },
+                    showCheckbox:true, //表示是否要显示复选框，该选项与series：中的selected配合使用。
+                    events :{
+                        checkboxClick: function(event) { //表示复选框的选择与取消都可以显示和隐藏所表示的数据。
+                            if(event.checked==true) {
+                                this.show();
+                            }
+                            else {
+                                this.hide();
+                            }
+                        },
+                    },
+                },
+            },
+            credits: {enabled:false},
+        });
+        chart1.reflow();
+    });
+    function callbacksuccess (data) {
+        console.log(data);
+        console.log(data);
+        var xaxis = [];
+        var ChartData = [];
+        for (var index = 0; index < data.length; ++index) {
+            var dataFormat = Highcharts.dateFormat('%Y<br/>%m-%d', parseInt(data[index][1]));
+            xaxis.push(dataFormat);
+            ccuChartData.push(data[index][4]);
+            dauChartData.push(data[index][6]);
+        }
+        console.log(ccuChartData);
+        var chart_total = $('#container1').highcharts();
+        chart_total.series[0].setData(ccuChartData);
+        chart_total.series[1].setData(dauChartData);
+        chart_total.xAxis[0].setCategories(xaxis);
+    }
+    </script>
+</body>
+
+</html>

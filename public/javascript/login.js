@@ -1,13 +1,14 @@
 $(function () {
-    //login.html
+    var cookieUser = "IDPUsername";
+    var cookiePawd = "IDPPassword";
+    
     $(".login-submit").click(function (e) {
-        //e.preventDefault();
+        e.preventDefault();
         var username = $(".username");
         var password = $(".userpwd");
         var msg = "";
         if ($.trim(username.val()) == "") {
             msg = "账号不能为空";
-            // username.focus();
             $( ".username" ).effect( "shake" );
             $("span.username-errormsg").html(msg);
             return false;
@@ -17,22 +18,16 @@ $(function () {
             $("span.userpwd-errormsg").html(msg);
             return false;
         }
-        var params = $(".loginform").serialize();
-        console.log(params);
-        $.post("/data/login", params, function (data, status) {
-            console.log(data);
-            var jsonData = JSON.parse(data);
-            errcode = jsonData['errcode'];
-            result = jsonData['result'];
-            console.log('errcode :' + errcode);
-            console.log('result: ' + result);
-            if (parseInt(errcode) == 0) {
-                window.location.href = 'index.html?name=' + username.val();                    
-            } else {
-                //password.focus();
-                $("span.username-errormsg").html(result);
-            }
-        });
+        var params = {};
+        params['username'] = username.val();
+        params['password'] = password.val();
+        var ret = Login(params);
+        if (0 == ret) {
+            console.log("Login successed.");
+            window.location.href = 'index.html';
+            //$.cookie(cookieUser, username.val(), {expires: 7, path: '/'});
+            //$.cookie(cookiePawd, password.val(), {expires: 7, path: '/'});
+        }
     });
 
     $(".username").focus(function(){
@@ -49,3 +44,12 @@ $(function () {
         }
     });
 })
+
+function OperationError(errcode, message) {
+    if (2 == errcode) {
+        $("span.userpwd-errormsg").html(message);
+        $( ".userpwd" ).effect( "shake" );
+    } else {
+        ErrorMsg("操作失败，请联系管理员.");
+    }
+}

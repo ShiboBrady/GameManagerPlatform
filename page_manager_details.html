@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Manager Details Page</title>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-easyui-v1.4.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/jquery-easyui-v1.4.4/themes/default/easyui.css">
+    <style type="text/css">
+    .content {width: 80%; margin: 0 auto;}
+    table { }
+    table tr {padding: 20px;}
+    table tr .table-lable { }
+    table tr td{}
+    table tr td input, table tr td textarea {width: 300px;}
+    .content .submit-button { padding-left: 100px; margin-top: 30px; }
+    .content .submit-button button { margin-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>角色列表</h2>
+        <table>
+            <tr class="GroupId">
+                <td>Id:</td>
+                <td><input class="GroupId-box" type="text"></input></td>
+            </tr>
+            <tr>
+                <td valign="top" class="table-lable">Parent:</td>
+                <td><input class="Parent-box" type="text"></td>
+            </tr>
+            <tr>
+                <td valign="top" class="table-lable">Text:</td>
+                <td ><input class="Text-box" type="text"></td>
+            </tr>
+            <tr>
+                <td valign="top" class="table-lable">Action:</td>
+                <td ><textarea class="Action-box" type="text" name="action" rows=8></textarea></td>
+            </tr>
+            <tr>
+                <td valign="top" class="table-lable">Url:</td>
+                <td ><input class="Url-box" type="text"></td>
+            </tr>
+        </table>
+        <div class="submit-button">
+            <button class="confirm_button">确定</button>
+            <button class="cancel_button">取消</button>
+        </div>
+    <div>
+    <script type="text/javascript">
+        $(function(){
+            $('.cancel_button').on('click', function () {
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
+            })
+            if (window.location.href.indexOf("?") > 0) {
+                console.log("come from edit roll page.");
+                var id = getQueryString('id');
+                var parentid = getQueryString('parent');
+                var text = getQueryString('text');
+                var action = getQueryString('action');
+                var url = getQueryString('url');
+                $('.GroupId-box').val(id);
+                $('.Parent-box').val(parentid);
+                $('.Text-box').val(text);
+                $('.Action-box').val(action);
+                $('.Url-box').val(url);
+                $('.GroupId-box').attr("readonly", "true");
+
+                $('.confirm_button').on('click', function () {
+                    console.log("confirm_button click.");
+                    var id = $('.GroupId-box').val();
+                    var parentid = $('.Parent-box').val();
+                    var text = $('.Text-box').val();
+                    var action = $('.Action-box').val();
+                    var url = $('.Url-box').val();
+                    console.log("id: " + id);
+                    console.log("parent: " + parentid);
+                    console.log("text: " + text);
+                    console.log("action: " + action);
+                    console.log("url: " + url);
+                    var paramDict = {};
+                    paramDict['id'] = id;
+                    paramDict['parent'] = parentid;
+                    paramDict['text'] = text;
+                    paramDict['action'] = action;
+                    paramDict['url'] = url;
+                    var params = transDictToSerializeString(paramDict);
+                    var ret = UpdatePageInfo(params);
+                    if (0 == ret) {
+                        parent.GetPageList(); //通知父窗口进行刷新
+                        window.parent.SuccessMsg('修改页面成功.');
+                        CloseThisWindow();
+                    }
+                })
+            } else {
+                console.log("come from create roll page.");
+                $('.GroupId').hide();
+                $('.confirm_button').on('click', function () {
+                    console.log("confirm_button click.");
+                    var parentid = $('.Parent-box').val();
+                    var text = $('.Text-box').val();
+                    var action = $('.Action-box').val();
+                    var url = $('.Url-box').val();
+                    console.log("id: " + id);
+                    console.log("parent: " + parentid);
+                    console.log("text: " + text);
+                    console.log("action: " + action);
+                    console.log("url: " + url);
+                    var paramDict = {};
+                    paramDict['parent'] = parentid;
+                    paramDict['text'] = text;
+                    paramDict['action'] = action;
+                    paramDict['url'] = url;
+                    var params = transDictToSerializeString(paramDict);
+                    var ret = AddNewPageInfo(params);
+                    if (0 == ret) {
+                        parent.GetPageList(); //通知父窗口进行刷新
+                        window.parent.SuccessMsg('新增页面成功.');
+                        CloseThisWindow();
+                    }
+                })
+            }
+        });
+    </script>
+</body>
+</html>

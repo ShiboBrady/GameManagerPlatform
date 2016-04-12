@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Manager Page</title>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/lib/jquery.md5.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <style type="text/css">
+        .create-user {
+            width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <form class="create-user">
+        <table>
+            <tr>
+                <td>账号：</td>
+                <td ><input class="userid-box" type="text"><i id="id-check"></i></td>
+            </tr>
+            <tr>
+                <td>用户名：</td>
+                <td ><input class="username-box" type="text"><i id="name-check"></i></td>
+            </tr>
+            <tr class="password-line">
+                <td>密码:</td>
+                <td><input class="password-box-first" type="password"><i id="pwd-first-check"></i></td>
+            </tr>
+            <tr class="password-line">
+                <td>确认密码:</td>
+                <td><input class="password-box-confirm" type="password"><i id="pwd-confirm-check"></i></td>
+            </tr>
+            <tr>
+                <td>角色:</td>
+                <td> <select class="userroll-list" name="userroll"></select> </td>
+            </tr>
+        </table>
+        <div class="submit-button">
+            <input type="button" class="confirm-button" value="确定"></input>
+            <input type="button" class="cancel-button" value="取消"></input>
+        </div>
+    </form>
+    <script type="text/javascript">
+        $(function(){
+            $('.cancel-button').on('click', function () {
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
+            })
+            var rolllist = GetRollNameInfo();
+            if (rolllist == null) {
+                console.log("Get roll list failed.");
+                return false;
+            }
+            InitRollDropDownList(rolllist);
+            if (window.location.href.indexOf("?") > 0) {
+                console.log("come from edit user page.");
+
+                $('.password-line').hide();
+                var userid = getQueryString('userid');
+                var username = getQueryString('username');
+                var userroll = getQueryString('userroll');
+                
+                $('.userid-box').val(userid);
+                $('.username-box').val(username);
+                $('.userroll-list  option:contains("'+userroll+'")').attr("selected", true);
+                $('.userid-box').attr("readonly", "true");
+                
+                $('.confirm-button').on('click', function () {
+                    console.log("confirm_button click.");
+                    var userNewId = $('.userid-box').val();
+                    var userNewName = $('.username-box').val();
+                    var userNewRoll = $('.userroll-list option:selected').text();
+                    if (userNewId == null || userNewId == "") {
+                        layer.tips("请输入账号", "#id-check");
+                        return;
+                    }
+                    if (userNewName == null || userNewName == "") {
+                        layer.tips("请输入用户名", "#name-check");
+                        return;
+                    }
+
+                    var paramDict = {};
+                    paramDict['username'] = userNewId;
+                    paramDict['trueName'] = userNewName;
+                    paramDict['groupName'] = userNewRoll;
+                    var params = transDictToSerializeString(paramDict);
+                    var ret = UpdateUserInfo(params);
+                    if (0 == ret) {
+                        parent.GetUserList(); //通知父窗口进行刷新
+                        window.parent.SuccessMsg('修改用户成功.');
+                        CloseThisWindow();
+                    }
+                })
+            } else {
+                console.log("come from create user page.");
+                $('.confirm-button').on('click', function () {
+                    console.log('confirm_button click.');
+                    var userId = $('.userid-box').val();
+                    var userName = $('.username-box').val();
+                    var userpwdfirst = $('.password-box-first').val();
+                    var userpwdconfirm = $('.password-box-confirm').val();
+                    var userRoll = $('.userroll-list option:selected').text();
+
+                    if (userId == null || userId == "") {
+                        layer.tips("请输入账号", "#id-check");
+                        return;
+                    }
+
+                    if (userName == null || userName == "") {
+                        layer.tips("请输入用户名", "#name-check");
+                        return;
+                    }
+
+                    if (userpwdfirst == null || userpwdfirst == "") {
+                        layer.tips("请输入密码", "#pwd-first-check");
+                        return;
+                    }
+
+                    if (userpwdconfirm == null || userpwdconfirm == "") {
+                        layer.tips("请再次输入密码", "#pwd-confirm-check");
+                        return;
+                    }
+
+                    if (userpwdfirst != userpwdconfirm) {
+                        layer.tips("两次密码不一致", "#pwd-confirm-check");
+                        return;
+                    }
+
+                    var paramDict = {};
+                    paramDict['username'] = userId;
+                    paramDict['trueName'] = userName;
+                    paramDict['password'] = userpwdfirst;
+                    paramDict['groupName'] = userRoll;
+                    var params = transDictToSerializeString(paramDict);
+                    var ret = AddNewUserInfo(paramDict);
+                    if (0 == ret) {
+                        parent.GetUserList(); //通知父窗口进行刷新
+                        window.parent.SuccessMsg('添加用户成功.');
+                        CloseThisWindow();
+                    }
+                })
+            };
+        });
+        function GetRollInfo(data) {
+            var rolllist = [];
+            for (var index in data) {
+                rolllist.push(data[index][0]);
+            }
+            return rolllist;
+        }
+
+        function InitRollDropDownList(data) {
+            var listitem = $('select.userroll-list');
+            for (var index in data) {
+                listitem.append('<option value='+index+'>'+data[index]+'</option>');
+            }
+        }
+        function OperationError(errcode, message) {
+            if (errcode == 8) {
+                layer.tips("该账号已存在", "#id-check");
+            } else {
+                ErrorMsg(message);
+            }
+        }
+    </script>
+</body>
+</html>

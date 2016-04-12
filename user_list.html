@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List Page</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery.md5.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+</head>
+<body onload="InitNavWhenPageLoad('user_list.html')">
+    <div class="nav_box">
+        <nav class="nav-content"></nav>
+        <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+    </div>
+    <div class="box">
+        <div class="chart_title"><span>用户列表</span></div>
+        <button class='create-user'>新建用户</button>
+        <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+    </div>
+    <script type="text/javascript">
+    $(function () {
+        var table = $('#search_result_table').DataTable({
+            "data":[],
+            "columns": [
+                { 'title': '账号' },
+                { 'title': '用户名' },
+                { 'title': '角色' },
+                { 'title': '操作' },
+            ],
+            "columnDefs": [{
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button class='edit'>编辑</button> <button class='change-pwd'>更改密码</button> <button class='delete'>删除</button>"
+            }],
+            "language": {
+                "lengthMenu": "每页 _MENU_ 条记录",
+                "zeroRecords": "没有找到记录",
+                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                "paginate": {
+                    "first":      "第一页",
+                    "last":       "最后一页",
+                    "next":       "下一页",
+                    "previous":   "前一页"
+                },
+            },
+            "paging": false,
+            "searching": false,
+            "select": false,
+            "scrollX": true,
+            "ordering": false,
+        });
+        $('#search_result_table').colResizable();
+        GetUserList();//获取用户列表
+
+        $('.create-user').on('click', function(){
+            layer.open({
+                type: 2,
+                area: ['700px', '400px'],
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭
+                content: 'user_manager.html'
+            });
+        });
+        $('#search_result_table').on('click', '.change-pwd', function(){
+            var userData = table.row($(this).parents('tr')).data();
+            var dict = {};
+            dict['userId'] = userData[0];
+            params = transDictToSerializeString(dict);
+            var contentUrl = 'user_change_password.html?' + params;
+            layer.open({
+                type: 2,
+                area: ['400px', '200px'],
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭
+                content: contentUrl,
+            });
+        });
+        $('#search_result_table').on('click', '.edit', function(){
+            var rollData = table.row($(this).parents('tr')).data();
+            var paramDict = {};
+            paramDict['userid'] = rollData[0];
+            paramDict['username'] = rollData[1];
+            paramDict['userroll'] = rollData[2];
+            params = transDictToSerializeString(paramDict);
+            var contentUrl = 'user_manager.html?' + params;
+            console.log(contentUrl);
+            layer.open({
+                type: 2,
+                area: ['700px', '400px'],
+                maxmin: false,
+                shadeClose: true, //点击遮罩关闭
+                content: contentUrl,
+            });
+        });
+        $('#search_result_table').on('click', '.delete',function(){
+            var rollData = table.row($(this).parents('tr')).data();
+            var userId = rollData[0];
+            console.log("User Id: " + userId);
+            var params = 'userName=' + userId;
+            layer.msg('确定要删除吗？', {
+                time: 0,
+                btn: ['确定', '取消'],
+                yes: function(index) {
+                    console.log("User delete this item.");
+                    if (0 == DeleteUser(params)) {
+                        GetUserList(); //通知父窗口进行刷新
+                        SuccessMsg("删除用户" + userId + "成功");
+                    }
+                    layer.close(index);
+                }
+            });
+        });
+    });
+    function GetUserList() {
+        var result = GetAllUserListData();
+        if (result == null) {
+            return false;
+        }
+        console.log(result);
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(result).draw();
+        return true;
+    }
+    </script>
+</body>
+</html>

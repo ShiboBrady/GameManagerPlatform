@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>智能数据后台管理系统</title>
-    <script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="public/javascript/index.js"></script>    
+    <link href="public/images/favicon.ico" mce_href="favicon.ico" rel="bookmark" type="image/x-icon" /> 
+    <link href="public/images/favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" /> 
+    <link href="public/images/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-cookie-v1.4.1/jquery.cookie.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/javascript/index.js"></script>   
     <link rel="stylesheet" type="text/css" href="public/css/index.css"/>
 </head>
 <body>
@@ -13,10 +19,10 @@
             <nav>
                 <ul class="nav">
                     <li class="nav_home active"><a _href="home.html" page_title="我的主页" class="nav-icon" href="javascript:void(0);" title="Home"><span class="icon-home">Home</span></a></li>
-                    <li><a href="left_menu_datacount.html" target="ifame_leftmenu" title="数据统计">数据统计</a></li>
+                    <!-- <li><a _href="left_menu_datacount.html" target="ifame_leftmenu" title="数据统计">数据统计</a></li>
                     <li><a href="#">GM工具</a></li>
-                    <li><a href="left_menu_finance.html" target="ifame_leftmenu" title="财务统计">财务统计</a></li>
-                    <li><a href="#">系统管理</a></li>
+                    <li><a href="_left_menu_finance.html" target="ifame_leftmenu" title="财务统计">财务统计</a></li>
+                    <li><a href="#">系统管理</a></li> -->
                 </ul>
             </nav>
         </div>
@@ -26,14 +32,20 @@
         <div id="userInfo">
             <div class="wraper">
                 <span>您好:</span>
-                <span class="userLoginName"></span>
-                <a href="login.html">[注销]</a>
+                <span class="userLoginName">zhangshibo</span>
+                <div class="useraction">
+                    <span class="useraction-arrow"></span>
+                    <ul class="useractioncontent">
+                        <li><a href="#" class="userChangePwd">修改密码</a></li>
+                        <li><a href="/">注销</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
     <section id="left_part">
         <div class="show_iframe">
-            <iframe class="ifame_leftmenu" name="ifame_leftmenu" src="left_menu_datacount.html" width="100%" height="100%" frameborder="0" ></iframe>
+            <!-- <iframe class="ifame_leftmenu" name="ifame_leftmenu" src="left_menu_datacount.html" width="100%" height="100%" frameborder="0" ></iframe> -->
         </div>
     </section>
     <section id="right_part">
@@ -55,9 +67,7 @@
         </div>
         <div class="more_tab">
             <ul>
-                <!-- <li class="active"><span class="title" page_href="home.html">我的主页</span><span class="close"></span></li>
-                <li class="active"><span class="title" page_href="home.html">我的主页</span><span class="close"></span></li>
-                <li class="active"><span class="title" page_href="home.html">我的主页</span><span class="close"></span></li> -->
+                <!-- <li class="active"><span class="title" page_href="home.html">我的主页</span><span class="close"></span></li> -->
             </ul>
         </div>
         <div class="show_iframe">

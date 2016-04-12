@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game CCU Info Page</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/highstock.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="public/lib/Highstock-4.2.1/js/modules/heatmap.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+<body onload="InitNavWhenPageLoad('game_ccu_info.html')">
+    <div id="wraper">
+        <div class="nav_box">
+            <nav class="nav-content"></nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
+        <div class="search-box">
+        </div>
+        <div class="box">
+            <div class="chart_title"><span>查询结果</span></div>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+        </div>
+        <!-- <div class="box chart_box">
+            <div class="chart_title"><span>图形展示</span></div>
+            <div id="container1"></div>
+        </div> -->
+    </div>
+    <script type="text/javascript">
+    var columnsData = [
+        { 'title': '时间' },
+        { 'title': '新手场' },
+        { 'title': '初级场' },
+        { 'title': '中级场' },
+        { 'title': '高级场' },
+    ];
+    $(function () {
+        var contentBox = '.search-box';
+        AddChooseOneDayBox(contentBox);
+        AddChannelBox(contentBox);
+        AddSearchButtonBox(contentBox, 'game_ccu');
+        InitDatatables('#search_result_table', columnsData, true);
+
+        // var x_arr = ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']; 
+        // var chart1 = new Highcharts.Chart({
+        //     chart: {
+        //         style:{ backgroundColor: '#fafafa', borderRadius: '5px'},
+        //         renderTo: 'container1',
+        //         type:'column',
+        //         // marginRight: 10,
+        //         margin: 75,
+        //         options3d: {
+        //             enabled: true,
+        //             alpha: 10,
+        //             beta: 25,
+        //             depth: 70
+        //         },
+        //         events: {                                                           
+        //             load: function() {
+        //                 this.xAxis[0].setCategories(x_arr);
+        //                 for (var index = 0; index < 4; ++index) {
+        //                     var data = [];
+        //                     for (var valueIndex = 0; valueIndex < 24; ++valueIndex) {
+        //                         data.push(0);
+        //                     }
+        //                     this.series[index].setData(data);
+        //                 }
+        //             }
+        //         }
+        //     },
+        //     title: {text:'游戏CCU柱状图'},
+        //     xAxis: {
+        //         title: {
+        //             text:'时间'
+        //         }, 
+        //         type: 'datetime',
+        //         // categories: x_arr,
+        //         tickPixelInterval: 150,
+        //         max:12,
+        //         min:0,
+        //     },
+        //     yAxis: {
+        //         title:{
+        //             text:'CCU'
+        //         },
+        //         opposite: true,
+        //     },
+        //     scrollbar: {
+        //            enabled: true,
+        //     },
+        //     series: [
+        //         {
+        //             name:'新手场',
+        //         },{
+        //             name:'初级场',
+        //         },{
+        //             name:'中级场',
+        //         },{
+        //             name:'高级场',
+        //         },
+        //     ],
+        //     legend: {
+        //         enabled: true,
+        //         symbolPadding: 20,
+        //         // symbolWidth: 0
+        //     },
+        //     plotOptions: {
+        //         series: {
+        //             marker: {
+        //                 enabled: false, //表示是否有数据点
+        //             },
+        //             pointPadding: 20,
+        //             pointWidth:15,
+        //         },
+        //     },
+        //     credits: {enabled:false},
+        //     column: {
+        //         depth: 25
+        //     },
+        // });
+        // chart1.reflow();
+    })
+
+    function callbacksuccess (data) {
+        var x_arr = ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+        if (data.length == 0) {
+            SuccessMsg("暂时没有数据呦~");
+            return false;
+        }
+        console.log(data);
+        if (data.length != 4) {
+            console.log("Data error.");
+            ErrorMsg("Data error.");
+            return false;
+        }
+        for (var index in data) {
+            if (data[index].length != 24) {
+                console.log("Data error.");
+                ErrorMsg("Data error.");
+                return false;
+            }
+        }
+
+        var newData = [];
+        for (var xindex = 0; xindex < 24; xindex++) {
+            var tempData = [];
+            for (var yindex = 0; yindex < 4; yindex++) {
+                tempData.push(data[yindex][xindex]);
+            }
+            newData.push(tempData);
+        }
+        for (var index in newData) {
+            newData[index].splice(0, 0, x_arr[index]);
+        }
+
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(newData).draw();
+        // var chart_total = $('#container1').highcharts();
+        // for (var index in data) {
+        //     chart_total.series[index].setData(data[index]);
+        //     // chart_total.xAxis[0].setCategories(x_arr[index]);
+        // }
+        // chart.xAxis[0].setExtremes(0, 10);
+    }
+    </script>
+</body>
+</html>

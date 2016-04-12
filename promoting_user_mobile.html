@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Promoting User Mobile</title>
+    <script type="text/javascript" src="public/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="public/lib/colResizable-1.5/colResizable-1.5.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <script type="text/javascript" src="public/javascript/content_common.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/media/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/css/dataTables.tableTools.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/table_style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/content.css">
+</head>
+
+<body onload="InitNavWhenPageLoad('promoting_user_mobile.html')">
+    <div id="wraper">
+        <div class="nav_box">
+            <nav class="nav-content"></nav>
+            <a class="refresh_button" title="刷新页面" href="javascript:void(0);" ></a>
+        </div>
+        <div class="search-box">
+        </div>
+        <div class="box">
+            <div class="chart_title"><span>查询结果</span></div>
+            <table id="search_result_table" class="dataTable display cell-border" cellspacing="0" width="100%"></table>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var columnsData = [
+        { 'title': 'userID' },
+        { 'title': '手机号' },
+        { 'title': '是否绑定' },
+        { 'title': '注册时间' },
+        { 'title': '是否充值' },
+    ];
+    $(function () {
+        var contentBox = '.search-box';
+        AddRangeDataChooseBox(contentBox);
+        AddChannelBox(contentBox);
+        AddSearchButtonBox(contentBox, 'channel_user_mobile');
+        $('#search_result_table').DataTable({
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "public/lib/DataTables-1.10.10/extensions/TableTools-2.2.4/swf/copy_csv_xls_pdf.swf",
+                "aButtons": [
+                    {
+                        "sExtends": "xls",
+                        "sButtonText": "保存为excel文件",
+                        "oSelectorOpts": {
+                            page: 'current',
+                        },
+                    }
+                ]
+            },
+            "oTableTools": {
+                "aButtons": [
+                    {
+                    "sExtends": "xls",
+                    "sCharSet": "utf8",
+                    "bBomInc":true,
+                    }
+                ]
+            },
+            "data":[],
+            "columns": columnsData,
+            "columnDefs": [
+              {
+                "targets": [ 1 ],
+                "visible": false,
+                "searchable": false
+              }
+            ],
+            "language": {
+                "lengthMenu": "每页 _MENU_ 条记录",
+                "zeroRecords": "没有找到记录",
+                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                "paginate": {
+                    "first":      "第一页",
+                    "last":       "最后一页",
+                    "next":       "下一页",
+                    "previous":   "前一页"
+                },
+            },
+            "paging": true,
+            "searching": false,
+            "select": false,
+            "scrollX": true,
+            "ordering": true,
+        });
+
+        // $('search_result_table').DataTable().columnDefs = [
+        //       {
+        //         "targets": [ 1 ],
+        //         "visible": false,
+        //         "searchable": false
+        //       }
+        //     ];
+        $('#search_result_table').colResizable();
+    });
+    function callbacksuccess (data) {
+        if (data.length == 0) {
+            SuccessMsg("暂时没有数据呦~");
+            return false;
+        }
+        for (var index in data) {
+            if (data[index].length != 5) {
+                console.log("Data error.");
+                ErrorMsg("Data error.");
+                return false;
+            }
+            if (data[index][2] == 1) {
+                data[index][2] = '是';
+            } else {
+                data[index][2] = '否';
+            }
+            if (data[index][4] == 1) {
+                data[index][4] = '是';
+            } else {
+                data[index][4] = '否';
+            }
+        }
+        for (var index in data) {
+            var time = data[index][3];
+            data[index].splice(0, 0);
+        }
+        var table = $("#search_result_table").DataTable();
+        table.clear();
+        table.rows.add(data).draw();
+    }
+    </script>
+</body>
+
+</html>

@@ -13,17 +13,30 @@ aside { width: 200px; height: 100%; /*background-color: #222;*/}
 #leftmenu_container .pagination > .active, #leftmenu_container .pagination > li:active { color: yellow; text-shadow: 0 -1px black; background: #1c1c1c; background: rgba(255, 255, 255, 0.01); border-color: black rgba(0, 0, 0, 0.65) rgba(0, 0, 0, 0.6); -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 0 2px 2px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.06); box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 0 2px 2px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.06); }
 /*菜单*/
 .none {display: none;}
-.accordion {width: 100%; bottom: 0; color: black; width: 100%; z-index: 10;}
-.accordion .section { width: 100%; }
-.accordion .section:last-of-type { border-bottom: 1px solid #c0c0c8; }
-.accordion .section input[type='radio'] { display: none; }
-.accordion .section label { display: table; border-top: 1px solid #c0c0c8; cursor: pointer; padding: 10px 20px; background: #f2f3f8; width: 100%; -webkit-transition: background 0.3s ease-in-out; -moz-transition: background 0.3s ease-in-out; -ms-transition: background 0.3s ease-in-out; transition: background 0.3s ease-in-out; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }
-.accordion .section label:hover { color: #5498e3; }
-.accordion .section a {text-decoration: none; color: inherit;}
-.accordion .section label span { display: table-cell; vertical-align: middle; }
-.accordion .section .content { padding: 0; height: 0; -webkit-transition: all 0.4s; -moz-transition: all 0.4s; -ms-transition: all 0.4s; transition: all 0.4s; opacity: 0; position: relative; overflow-y: hidden; }
-.accordion .section .content ul { width: 100%; padding: 0; margin: 0; list-style: none; background-color: #fbfbfd; }
-.accordion .section .content ul li { padding: 10px 0 10px 40px; margin: 0; }
-.accordion .section .content ul li:hover { cursor: pointer; background-clip: padding-box; color: #5498e3; }
-.accordion .section input[type='radio']:checked + label { background: #f2f3f8; border-left: 3px solid #5498e3; border-bottom: 1px solid #c0c0c8; color: #5498e3; } /*选择与被选中的radio元素之后紧邻的label元素*/
-.accordion .section input[type='radio']:checked ~ .content { height: auto; opacity: 1; z-index: 10; } /*前面有被选中的radio的content*/
+
+.accordion-third {}
+.accordion-third > .accordion-twice {}
+.accordion-third > .accordion-twice:last-of-type { border-bottom: 1px solid #c0c0c8; }
+.accordion-third > .accordion-twice > label { display: table; width: 100%; padding: 10px 20px; border-top: 1px solid #c0c0c8;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
+.accordion-third > .accordion-twice > label > i { display: inline-block; width: 16px; height: 16px; float: right; background: url("../images/accordion_arrows.png") no-repeat -16px center; }
+.accordion-third > .accordion-twice > input[type='radio']:checked ~ label > i { -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg); }
+.accordion-third > .accordion-twice > input[type='radio'] { display: none; }
+.accordion-third > .accordion-twice > input[type='radio']:checked {}
+.accordion-third > .accordion-twice > input[type='radio']:checked ~ .section { height: auto; opacity: 1; z-index: 10; }
+.accordion-third > .accordion-twice > .section { padding: 0; height: 0; -webkit-transition: all 0.4s; -moz-transition: all 0.4s; -ms-transition: all 0.4s; transition: all 0.4s; opacity: 0; position: relative; overflow-y: hidden; }
+
+
+.accordion-twice > {width: 100%; bottom: 0; color: black; width: 100%; z-index: 10;}
+.accordion-twice > .section { width: 100%; }
+.accordion-twice > .section:last-of-type { border-bottom: 1px solid #c0c0c8; }
+.accordion-twice > .section input[type='radio'] { display: none; }
+.accordion-twice > .section label { display: table; border-top: 1px solid #c0c0c8; cursor: pointer; padding: 10px 40px; background: #f2f3f8; width: 100%; -webkit-transition: background 0.3s ease-in-out; -moz-transition: background 0.3s ease-in-out; -ms-transition: background 0.3s ease-in-out; transition: background 0.3s ease-in-out; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }
+.accordion-twice > .section label:hover { color: #5498e3; }
+.accordion-twice > .section a {text-decoration: none; color: inherit;}
+.accordion-twice > .section label span { display: table-cell; vertical-align: middle; }
+.accordion-twice > .section .content { padding: 0; height: 0; -webkit-transition: all 0.4s; -moz-transition: all 0.4s; -ms-transition: all 0.4s; transition: all 0.4s; opacity: 0; position: relative; overflow-y: hidden; }
+.accordion-twice > .section .content ul { width: 100%; padding: 0; margin: 0; list-style: none; background-color: #fbfbfd; }
+.accordion-twice > .section .content ul li { padding: 10px 0 10px 60px; margin: 0; }
+.accordion-twice > .section .content ul li:hover { cursor: pointer; background-clip: padding-box; color: #5498e3; }
+.accordion-twice > .section input[type='radio']:checked + label { background: #f2f3f8; border-left: 3px solid #5498e3; border-bottom: 1px solid #c0c0c8; color: #5498e3; } /*选择与被选中的radio元素之后紧邻的label元素*/
+.accordion-twice > .section input[type='radio']:checked ~ .content { height: auto; opacity: 1; z-index: 10; } /*前面有被选中的radio的content*/

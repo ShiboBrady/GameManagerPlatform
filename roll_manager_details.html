@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Roll Manager Details Page</title>
+    <script type="text/javascript" src="public/lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery-easyui-v1.4.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="public/lib/layer-v2.2/layer.js"></script>
+    <script type="text/javascript" src="public/javascript/common_func.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/lib/jquery-easyui-v1.4.4/themes/default/easyui.css">
+    <style type="text/css">
+    .content {width: 80%; margin: 0 auto;}
+    table { }
+    table tr {padding: 20px;}
+    table tr .table-lable { }
+    table tr td{}
+    table tr td input, table tr td textarea {width: 300px;}
+    .content .submit-button { padding-left: 100px; margin-top: 30px; }
+    .content .submit-button button { margin-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>角色列表</h2>
+        <table>
+            <tr>
+                <td class="table-lable">角色名称：</td>
+                <td><input class="rollname-box" type="text"></input><i id="id-check"></i></td>
+            </tr>
+            <tr>
+                <td valign="top" class="table-lable">角色备注：</td>
+                <td><textarea class="rollinfo-box" name="MSG" rows=4></textarea><i id="rollinfo-check"></i></td>
+            </tr>
+            <tr>
+                <td valign="top" class="table-lable">对应权限：</td>
+                <td ><i id="roll-check"></i><ul id="tt" class="easyui-tree"></ul></td>
+            </tr>
+        </table>
+        <div class="submit-button">
+            <button class="confirm_button">确定</button>
+            <button class="cancel_button">取消</button>
+        </div>
+    <div>
+    <script type="text/javascript">
+        $(function(){
+             $('.cancel_button').on('click', function () {
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
+            })
+            if (window.location.href.indexOf("?") > 0) {
+                var rollname = getQueryString('rollname');
+                var rollinfo = getQueryString('rollinfo');
+                $('.rollname-box').val(rollname);
+                $('.rollinfo-box').val(rollinfo);
+                var params = 'groupName=' + rollname;
+                var JsonMenuTree = GetOtherRollListData(params);
+                if (JsonMenuTree == null) {
+                    return false;
+                }
+                InitMenuTree(JsonMenuTree);
+
+                $('.confirm_button').on('click', function () {
+                    console.log("confirm_button click.");
+                    // $("#tt").tree("collapseAll");
+                    var rollNewName = $('.rollname-box').val();
+                    var rollNewInfo = $('.rollinfo-box').val();
+                    var RootsObj = $('#tt').tree('getRoots');
+                    var nodes = cloneObj(RootsObj);
+                    HandleJsonData(nodes); //选中check字段
+                    if (!SubmitCheck(rollNewName, rollNewInfo, nodes)) {
+                        return;
+                    }
+                    FormatJsonData(nodes); //去掉easyui自带的数据
+                    var jsonStr = JSON.stringify(nodes);
+                    var oldJsonStr = JSON.stringify(JsonMenuTree);
+
+                    if (rollname == rollNewName && rollinfo == rollNewInfo && oldJsonStr == jsonStr) {
+                        window.parent.SuccessMsg('没有更改角色信息.');
+                        CloseThisWindow();
+                        return;
+                    }
+
+                    var paramDict = {};
+                    paramDict['oldName'] = rollname;
+                    paramDict['groupName'] = rollNewName;
+                    paramDict['groupInfo'] = rollNewInfo;
+                    paramDict['jsonData'] = jsonStr;
+                    var params = transDictToSerializeString(paramDict);
+                    var ret = UpdateRollInfo(params);
+                    if (0 == ret) {
+                        window.parent.GetRollList(); //通知父窗口进行刷新
+                        window.parent.SuccessMsg('修改角色信息成功.');
+                        CloseThisWindow();
+                    }
+                })
+            } else {
+                var JsonMenuTree = GetEmptyRollListData();
+                if (JsonMenuTree == null) {
+                    console.log('Get roll list failed.');
+                    return false;
+                }
+                InitMenuTree(JsonMenuTree);
+                $('.confirm_button').on('click', function () {
+                    console.log('confirm_button click.');
+                    // $("#tt").tree("collapseAll");
+                    var rollName = $('.rollname-box').val();
+                    var rollInfo = $('.rollinfo-box').val();
+                    var RootsObj = $('#tt').tree('getRoots');
+                    var nodes = cloneObj(RootsObj);
+                    HandleJsonData(nodes); //选中check字段
+                    if (!SubmitCheck(rollName, rollInfo, nodes)) {
+                        return;
+                    }
+                    FormatJsonData(nodes); //去掉easyui自带的数据
+                    var jsonStr = JSON.stringify(nodes);
+                    var paramDict = {};
+                    paramDict['groupName'] = rollName;
+                    paramDict['groupInfo'] = rollInfo;
+                    paramDict['jsonData'] = jsonStr;
+                    var params = transDictToSerializeString(paramDict);
+                    var ret = AddNewRollInfo(params);
+                    if (0 == ret) {
+                        window.parent.GetRollList(); //通知父窗口进行刷新
+                        window.parent.SuccessMsg('添加角色信息成功.');
+                        CloseThisWindow();
+                    }
+                })
+            };
+        });
+        function InitMenuTree (data) {
+            $("#tt").tree({
+                data: data,
+                checkbox: true,
+                cascadeCheck: false,
+                animate: true,
+                lines: true,
+                onlyLeafCheck: false,
+                onCheck: function (node, checked) {
+                    if (checked) {
+                        var parentNode = $("#tt").tree('getParent', node.target);
+                        if (parentNode != null) {
+                            $("#tt").tree('check', parentNode.target);
+                        }
+                    } else {
+                        var childNode = $("#tt").tree('getChildren', node.target);
+                        if (childNode.length > 0) {
+                            for (var i = 0; i < childNode.length; i++) {
+                                $("#tt").tree('uncheck', childNode[i].target);
+                            }
+                        }
+                    }
+                }
+            })
+        }
+        function IsTreeChecked(treeData){
+            var result = false;
+            if (treeData.length == 0) {
+                return result;
+            }
+            for (var index in treeData) {
+                var checked = treeData[index].checked;
+                var children = treeData[index].children;
+                if (checked == true && children.length == 0) {
+                    result = true;
+                } else {
+                    result = result || IsTreeChecked(children);
+                }
+            }
+            return result;
+        }
+        function SubmitCheck(rollname, rollInfo, rolldata) {
+            if (rollname == null || rollname == "") {
+                layer.tips("请输入账号", "#id-check");
+                location.hash="#id-check";
+                return false;
+            }
+
+            if (rollInfo == null || rollInfo == "") {
+                layer.tips("请输入账号描述", "#rollinfo-check");
+                location.hash="#rollinfo-check";
+                return false;
+            }
+            
+            if (!IsTreeChecked(rolldata)) {
+                layer.tips("请输入权限", "#roll-check", { tips: 1 });
+                location.hash="#roll-check";
+                return false;
+            }
+            return true;
+        }
+
+        function OperationError(errcode, message) {
+            if (errcode == 8) {
+                layer.tips("该账号已存在", "#id-check");
+            } else {
+                ErrorMsg(message);
+            }
+        }
+    </script>
+</body>
+</html>
